@@ -16,7 +16,7 @@ The general milestones for the project development are showed below.
 ### Milestone 2 - 13/11/2018
 - [ ] Submit the game design document
 
-### Milestone 3 - 11/12/2018
+### Milestone 3 - 14/12/2018
 - [ ] Prototype presentation event (DEIB Conference room)
 
 ### Milestone 4 - 08/01/2019
