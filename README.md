@@ -3,6 +3,10 @@
 ## Overview
 This repository is intended to keep track of the design and development of Mirage videogame, a project for the Videogame Design and Programming course at Politecnico di Milano.
 
+## Info
+
+## Links
+
 ## Progress
 The general milestones for the project development are showed below.
 
