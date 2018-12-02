@@ -4,16 +4,20 @@ using UnityEngine;
 
 public class CheckGround : MonoBehaviour {
     private PlayerControl player;
+    private Collider2D collider;
 
     // Use this for initialization
     void Start()
     {
         player = GetComponentInParent<PlayerControl>();
+        collider = player.GetComponent<Collider2D>();
     }
 
     void OnCollisionStay2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        // Player on the ground or upon a moveable
+        if ((col.gameObject.tag == "Ground" || col.gameObject.tag == "Moveable") 
+                                               && col.contacts[0].point.y <= col.contacts[0].otherCollider.transform.position.y)
         {
             player.grounded = true;
         }
@@ -21,7 +25,7 @@ public class CheckGround : MonoBehaviour {
 
     void OnCollisionExit2D(Collision2D col)
     {
-        if (col.gameObject.tag == "Ground")
+        if (col.gameObject.tag == "Ground"  || col.gameObject.tag == "Moveable")
         {
             player.grounded = false;
         }
