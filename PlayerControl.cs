@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 using UnityEngine.Serialization;
 
 public class PlayerControl : MonoBehaviour {
     //Mirage
     public float speed = 10f;
+	public float vSpeed = 0f;
     public float maxSpeed = 1f;
     public float jumpPower = 6.5f;
     public float climbSpeed = 3;
@@ -21,8 +23,10 @@ public class PlayerControl : MonoBehaviour {
     bool run = false;
     public bool climb = false;
     public bool moveObject = false;
+	public bool interact = false;
 
 	private BoxCollider2D floorCollider;
+	private Rigidbody2D hayCart; 
 
     private Rigidbody2D rb2d;
     Animator anim;
@@ -35,6 +39,8 @@ public class PlayerControl : MonoBehaviour {
         anim = GetComponent<Animator>();
 
 		floorCollider = GameObject.Find("Floor").GetComponent<BoxCollider2D>();
+
+		hayCart = GameObject.Find("HayCart").GetComponent<Rigidbody2D>();
 		
 	    gravityStore = rb2d.gravityScale;
 	}
@@ -55,6 +61,7 @@ public class PlayerControl : MonoBehaviour {
 		    if (!onLadder || Input.GetKeyDown(KeyCode.E))
 		    {
 			    climb = false;
+			    hayCart.bodyType = RigidbodyType2D.Dynamic;
 			    floorCollider.enabled = true;
 		    }
 	    }
@@ -80,8 +87,12 @@ public class PlayerControl : MonoBehaviour {
 		    if (onLadder && !moveObject && !onMoveableObject && Input.GetKeyDown(KeyCode.E))
 		    {
 			    climb = true;
+			    hayCart.bodyType = RigidbodyType2D.Static;
 			    floorCollider.enabled = false;
 		    }
+		    
+		    if (rb2d.transform.position.y < floorCollider.transform.position.y)
+			    hayCart.bodyType = RigidbodyType2D.Static;
 		    
 		    if (run)
 		    {
@@ -101,7 +112,7 @@ public class PlayerControl : MonoBehaviour {
 	private void FixedUpdate()
 	{
 		float h = Input.GetAxis("Horizontal");
-
+		
 		if (!climb)
 		{
 			rb2d.AddForce(Vector2.right * speed * h);
@@ -124,7 +135,22 @@ public class PlayerControl : MonoBehaviour {
         {
             rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             jump = false;
+	        anim.SetBool("grounded", false);
         }
+		
+        anim.SetBool("interact", interact);
+		
+		if (interact = true)
+			interact = false;
+		
+		anim.SetBool("climb", climb);
+		
+        anim.SetBool("moveObject", moveObject);
+		
+		anim.SetBool("grounded", grounded);
+		
+		//Set the vertical animation
+		anim.SetFloat("vSpeed", rb2d.velocity.y);
 
     }
 }

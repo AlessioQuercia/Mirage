@@ -15,22 +15,22 @@ public class SwitchZone : MonoBehaviour {
 	public bool lever4_on;
 	public bool lever5_on;
 	
-	private float platformSpeed = 3f;
+	public float platformSpeed = 3f;
 
-	private float hideDown = -3.9f;
-	private float hideUp = 20f;
+	public float hideDown = -3.9f;
+	public float hideUp = 20f;
 	
-	private float p1_x = -10.83f;
-	private float p2_x = -6.53f;
-	private float p3_x = -5.04f;
-	private float p4_x = 0.85f;
-	private float p5_x = 5.96f;
+	private float p1_x; // = -10.83f;
+	private float p2_x; // = -6.53f;
+	private float p3_x; // = -5.04f;
+	private float p4_x; // = 0.85f;
+	private float p5_x; // = 5.96f;
 
-	private float p1_stop = 1.94f;
-	private float p2_stop = -0.21f;
-	private float p3_stop = 7.44f;
-	private float p4_stop = 9.47f;
-	private float p5_stop = 11.69f;
+	public float p1_stop = 1.94f;
+	public float p2_stop = -0.21f;
+	public float p3_stop = 7.44f;
+	public float p4_stop = 9.47f;
+	public float p5_stop = 11.69f;
 
 	private Rigidbody2D p1rb;
 	private Rigidbody2D p2rb;
@@ -66,6 +66,12 @@ public class SwitchZone : MonoBehaviour {
 		lever3 = GameObject.Find("Lever3").GetComponent<Collider2D>();
 		lever4 = GameObject.Find("Lever4").GetComponent<Collider2D>();
 		lever5 = GameObject.Find("Lever5").GetComponent<Collider2D>();
+
+		p1_x = p1rb.transform.position.x;
+		p2_x = p2rb.transform.position.x;
+		p3_x = p3rb.transform.position.x;
+		p4_x = p4rb.transform.position.x;
+		p5_x = p5rb.transform.position.x;
 	}
 
 	private void OnTriggerStay2D(Collider2D other)
@@ -92,6 +98,7 @@ public class SwitchZone : MonoBehaviour {
 			String leverName = getLeverName();
 			turn(leverName);
 			activateLever(leverName);
+			player.interact = true;
 		}
 
 		if (p1_toStop && (p1rb.velocity.y > 0 && p1rb.position.y >= p1_stop || 
@@ -128,6 +135,37 @@ public class SwitchZone : MonoBehaviour {
 			p5rb.velocity = new Vector2(0, 0);
 			p5_toStop = false;
 		}
+
+//		if (lever1_on && p1rb.position.x < p1_stop && p2rb.position.x < p2_stop)
+//			lever1_on = false;
+//		
+//		else if (!lever1_on && p1rb.position.x > hideDown && p2rb.position.x > hideDown)
+//			lever1_on = true;
+//		
+//		if (lever2_on && p1rb.position.x < p1_stop && p3rb.position.x > p3_stop)
+//			lever2_on = false;
+//		
+//		else if (!lever2_on && p1rb.position.x > hideDown && p2rb.position.x < p2_stop && p3rb.position.x < hideUp)
+//			lever2_on = true;
+//
+//		if (lever3_on && p4rb.position.x > p4_stop)
+//			lever3_on = false;
+//		
+//		else if (!lever3_on && p3rb.position.x > p3_stop && p4rb.position.x < hideUp)
+//			lever3_on = true;
+//		
+//		if (lever4_on && p4rb.position.x > p4_stop && p5rb.position.x > p5_stop)
+//			lever4_on = false;
+//		
+//		else if (!lever4_on && p3rb.position.x > p3_stop && p4rb.position.x < hideUp && p5rb.position.x < hideUp)
+//			lever4_on = false;
+//		
+//		if (lever5_on && p3rb.position.x > p3_stop && p5rb.position.x > p5_stop)
+//			lever5_on = false;
+//		
+//		else if (!lever5_on && p3rb.position.x < hideUp && p5rb.position.x < hideUp)
+//			lever5_on = true;
+		
 	}
 
 	private void turn(String leverName)
@@ -183,10 +221,12 @@ public class SwitchZone : MonoBehaviour {
 			{
 				if (lever1_on)
 				{
+					// Activate platform 1
 					if (p1rb.transform.position.y < p1_stop)
 					{
 						p1rb.velocity = new Vector2(p1rb.velocity.x, platformSpeed);
 					}
+					// Activate platform 2
 					if (p2rb.transform.position.y < p2_stop)
 					{
 						p2rb.velocity = new Vector2(p2rb.velocity.x, platformSpeed);
@@ -194,11 +234,13 @@ public class SwitchZone : MonoBehaviour {
 				}
 				else
 				{
+					// Deactivate platform 1
 					if (p1rb.transform.position.y > hideDown)
 					{
 						p1rb.velocity = new Vector2(p1rb.velocity.x, -platformSpeed);
 					}
 
+					// Deactivate platform 2
 					if (p2rb.transform.position.y > hideDown)
 					{
 						p2rb.velocity = new Vector2(p2rb.velocity.x, -platformSpeed);
@@ -214,14 +256,19 @@ public class SwitchZone : MonoBehaviour {
 			{
 				if (lever2_on)
 				{
+					// Activate platform 1
 					if (p1rb.transform.position.y < p1_stop)
 					{
 						p1rb.velocity = new Vector2(p1rb.velocity.x, platformSpeed);
 					}
+					
+					// Deactivate platform 2
 					if (p2rb.transform.position.y > hideDown)
 					{
 						p2rb.velocity = new Vector2(p2rb.velocity.x, -platformSpeed);
 					}
+					
+					// Activate platform 3
 					if (p3rb.transform.position.y > p3_stop)
 					{
 						p3rb.velocity = new Vector2(p3rb.velocity.x, -platformSpeed);
@@ -229,11 +276,14 @@ public class SwitchZone : MonoBehaviour {
 				}
 				else
 				{
+					// Deactivate platform 1
 					if (p1rb.transform.position.y > hideDown)
 					{
 						p1rb.velocity = new Vector2(p1rb.velocity.x, -platformSpeed);
 					}
 
+					
+					// Deactivate platform 2
 					if (p3rb.transform.position.y < hideUp)
 					{
 						p3rb.velocity = new Vector2(p2rb.velocity.x, platformSpeed);
@@ -250,17 +300,21 @@ public class SwitchZone : MonoBehaviour {
 			{
 				if (lever3_on)
 				{
+					// Deactivate platform 3
 					if (p3rb.transform.position.y < hideUp)
 					{
 						p3rb.velocity = new Vector2(p3rb.velocity.x, platformSpeed);
 					}
+					
 //					if (p2rb.transform.position.y < p2_stop)
 //					{
 //						p2rb.velocity = new Vector2(p2rb.velocity.x, platformSpeed);
 //					}
-					if (p4rb.transform.position.y > p2_stop)
+					
+					// Activate platform 4
+					if (p4rb.transform.position.y > p4_stop)
 					{
-						p4rb.velocity = new Vector2(p2rb.velocity.x, -platformSpeed);
+						p4rb.velocity = new Vector2(p4rb.velocity.x, -platformSpeed);
 					}
 				}
 				else
@@ -270,6 +324,7 @@ public class SwitchZone : MonoBehaviour {
 //						p2rb.velocity = new Vector2(p2rb.velocity.x, -platformSpeed);
 //					}
 
+					// Deactivate platform 4
 					if (p4rb.transform.position.y < hideUp)
 					{
 						p4rb.velocity = new Vector2(p4rb.velocity.x, platformSpeed);

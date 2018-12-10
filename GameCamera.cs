@@ -16,7 +16,7 @@ public class GameCamera : MonoBehaviour {
 	private float maxResize = 150;
 	private float resize = 0;
 	private float startResizeHeightDown = -7f;
-	private float resizeDelta = 1.5f;	//0.045f;
+	private float resizeDelta = 1.8f;	//0.045f;
 	private float delta_y;
 	private float rescalePosition;
 	private float lastLowestY = 100000000000;
