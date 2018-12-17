@@ -55,7 +55,8 @@ public class MoveableZone : MonoBehaviour {
     // Update is called once per frame
     void Update () 
     {
-        if (player.onMoveableObject && Input.GetKeyDown(KeyCode.E))
+        if (player.onMoveableObject && !playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()) 
+                                    && Input.GetKeyDown(KeyCode.E))
         {
             player.moveObject = true;
             if (player.flippedRight)
