@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.PlayerLoop;
 
 public class MoveableZone : MonoBehaviour {
     private PlayerControl32 player;
@@ -12,6 +13,10 @@ public class MoveableZone : MonoBehaviour {
     private bool canRelease;
 
     private float moveableObjectPosition;
+    
+    private Collider2D playerRaycastLeftCollider;
+    private Collider2D playerRaycastRightCollider;
+    private Collider2D playerRaycastDownCollider;
 
     // Use this for initialization
     void Start()
@@ -19,6 +24,10 @@ public class MoveableZone : MonoBehaviour {
         player = FindObjectOfType<PlayerControl32>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
+        
+        playerRaycastLeftCollider = player.RaycastLeft.GetComponent<Collider2D>();
+        playerRaycastRightCollider = player.RaycastRight.GetComponent<Collider2D>();
+        playerRaycastDownCollider = player.RaycastDown.GetComponent<Collider2D>();
     }
 
     void OnCollisionStay2D(Collision2D col)
@@ -26,6 +35,11 @@ public class MoveableZone : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             player.onMoveableObject = true;
+            
+            if (!playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()))
+            {
+                player.nextToMoveableObject = true;
+            }
         }
     }
 
@@ -34,6 +48,7 @@ public class MoveableZone : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             player.onMoveableObject = false;
+            player.nextToMoveableObject = false;
         }
     }
 	
@@ -44,9 +59,9 @@ public class MoveableZone : MonoBehaviour {
         {
             player.moveObject = true;
             if (player.flippedRight)
-                moveableObjectPosition = 1.239f;
+                moveableObjectPosition = 1.23f;
             else
-                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.355f;
+                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.37f;
         }    
 		
         if (player.moveObject && Input.GetKeyUp(KeyCode.E))

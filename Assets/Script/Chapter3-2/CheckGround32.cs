@@ -6,12 +6,16 @@ public class CheckGround32 : MonoBehaviour
 {
     private PlayerControl32 player;
     private Collider2D collider;
+    private Collider2D playerRayastLeftCollider;
+    private Collider2D playerRayastRightCollider;
 
     // Use this for initialization
     void Start()
     {
         player = GetComponentInParent<PlayerControl32>();
         collider = player.GetComponent<Collider2D>();
+        playerRayastLeftCollider = player.RaycastLeft.GetComponent<Collider2D>();
+        playerRayastRightCollider = player.RaycastRight.GetComponent<Collider2D>();
     }
 
     void OnCollisionStay2D(Collision2D col)
@@ -26,8 +30,6 @@ public class CheckGround32 : MonoBehaviour
 
     void OnCollisionExit2D(Collision2D col)
     {
-        Collider2D playerRayastLeftCollider = player.RaycastLeft.GetComponent<Collider2D>();
-        Collider2D playerRayastRightCollider = player.RaycastRight.GetComponent<Collider2D>();
         if (col.gameObject.tag == "Ground")
         {
             player.grounded = false;

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerControl32 : MonoBehaviour
@@ -28,13 +29,15 @@ public class PlayerControl32 : MonoBehaviour
     public bool grounded;
     public bool onLadder;
     public bool onMoveableObject;
+    public bool nextToMoveableObject;
     public bool onSwitch;
 
-    bool jump = false;
-    bool run = false;
-    public bool climb = false;
-    public bool moveObject = false;
-    public bool interact = false;
+    bool jump;
+    bool run;
+    public bool climb;
+    public bool moveObject;
+    public bool interact;
+    public bool drag;
 
     private BoxCollider2D floorCollider;
     private Rigidbody2D hayCart;
@@ -43,10 +46,12 @@ public class PlayerControl32 : MonoBehaviour
     Animator anim;
 
     public bool flippedRight;
+    private float flipDegree;
+    private float flipDelta = 0.3f;
 
     public bool jumping;
     private long jumpReload;
-
+    
     //	public Rigidbody2D movObjRb2d;
 
     // Use this for initialization
@@ -63,6 +68,7 @@ public class PlayerControl32 : MonoBehaviour
 
         grounded = true;
         flippedRight = true;
+        flipDegree = 1;
     }
 
     // Update is called once per frame
@@ -71,7 +77,6 @@ public class PlayerControl32 : MonoBehaviour
         anim.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
 
         anim.SetBool("grounded", grounded);
-//        anim.SetBool("running", run);
 
         if (climb)
         {
@@ -106,7 +111,7 @@ public class PlayerControl32 : MonoBehaviour
                 jump = true;
             }
 
-            if (!moveObject && Input.GetKeyDown(KeyCode.LeftShift))// && !onWall)
+            if (!nextToMoveableObject && !moveObject && Input.GetKeyDown(KeyCode.LeftShift))// && !onWall)
             {
                 run = true;
             }
@@ -132,10 +137,12 @@ public class PlayerControl32 : MonoBehaviour
             else if (moveObject)
             {
                 maxSpeed = 1f;
+                hayCart.mass = 1;
             }
             else
             {
                 maxSpeed = 2f;
+                hayCart.mass = 100;
             }
 
         }
@@ -158,13 +165,21 @@ public class PlayerControl32 : MonoBehaviour
 
         if (h > 0.1f && !moveObject)
         {
-            transform.localScale = new Vector3(1f, 1f, 1f);
+            if (flipDegree + flipDelta < 1)
+                flipDegree += flipDelta;
+            else
+                flipDegree = 1;
+            transform.localScale = new Vector3(flipDegree, 1f, 1f);
             flippedRight = true;
         }
 
         if (h < -0.1f && !moveObject)
         {
-            transform.localScale = new Vector3(-1f, 1f, 1f);
+            if (flipDegree - flipDelta > -1)
+                flipDegree -= flipDelta;
+            else
+                flipDegree = -1;
+            transform.localScale = new Vector3(flipDegree, 1f, 1f);
             flippedRight = false;
         }
 
@@ -176,6 +191,14 @@ public class PlayerControl32 : MonoBehaviour
             anim.SetBool("grounded", false);
         }
 
+        if (moveObject)
+        {
+            if (flippedRight && h < 0 || !flippedRight && h > 0)
+                drag = true;
+            else
+                drag = false;
+        }
+
         anim.SetBool("interact", interact);
 
         if (interact = true)
@@ -184,6 +207,8 @@ public class PlayerControl32 : MonoBehaviour
         anim.SetBool("climb", climb);
 
         anim.SetBool("moveObject", moveObject);
+        
+        anim.SetBool("drag", drag);
 
         anim.SetBool("grounded", grounded);
 

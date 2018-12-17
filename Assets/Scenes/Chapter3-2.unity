@@ -197,8 +197,8 @@ GameObject:
   m_Component:
   - component: {fileID: 65066405}
   - component: {fileID: 65066404}
-  - component: {fileID: 65066406}
   - component: {fileID: 65066407}
+  - component: {fileID: 65066406}
   m_Layer: 0
   m_Name: Lever5
   m_TagString: Switch
@@ -273,22 +273,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 65066403}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca80dfa9d2dce44a0862a535688014, type: 3}
+  m_Script: {fileID: 11500000, guid: 11a1036d278e66b4cb6d3b1082bdf117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever1_on: 0
-  lever2_on: 0
-  lever3_on: 0
-  lever4_on: 0
-  lever5_on: 0
-  platformSpeed: 3
-  hideDown: -7.3
-  hideUp: 2.5
-  p1_stop: -0.55
-  p2_stop: -0.55
-  p3_stop: -0.36
-  p4_stop: 0.3
-  p5_stop: 0.87
 --- !u!61 &65066407
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -897,8 +884,8 @@ GameObject:
   m_Component:
   - component: {fileID: 578741131}
   - component: {fileID: 578741130}
-  - component: {fileID: 578741132}
   - component: {fileID: 578741133}
+  - component: {fileID: 578741132}
   m_Layer: 0
   m_Name: Lever3
   m_TagString: Switch
@@ -973,22 +960,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 578741129}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca80dfa9d2dce44a0862a535688014, type: 3}
+  m_Script: {fileID: 11500000, guid: 11a1036d278e66b4cb6d3b1082bdf117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever1_on: 0
-  lever2_on: 0
-  lever3_on: 0
-  lever4_on: 0
-  lever5_on: 0
-  platformSpeed: 3
-  hideDown: -7.3
-  hideUp: 2.5
-  p1_stop: -0.55
-  p2_stop: -0.55
-  p3_stop: -0.36
-  p4_stop: 0.3
-  p5_stop: 0.87
 --- !u!61 &578741133
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1089,6 +1063,69 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &639700516
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 639700518}
+  - component: {fileID: 639700517}
+  m_Layer: 0
+  m_Name: SwitchManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &639700517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 639700516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cae3f217107bce4ba5747a10c9d8bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lever1_on: 0
+  lever2_on: 0
+  lever3_on: 0
+  lever4_on: 0
+  lever5_on: 0
+  platformSpeed: 3
+  hideDown: -7.3
+  hideUp: 2.5
+  p1_stop: -0.55
+  p2_stop: -0.55
+  p3_stop: -0.36
+  p4_stop: 0.3
+  p5_stop: 0.87
+  p1rb: {fileID: 737869503}
+  p2rb: {fileID: 1390112773}
+  p3rb: {fileID: 238356092}
+  p4rb: {fileID: 1649986975}
+  p5rb: {fileID: 930023670}
+  lever1: {fileID: 786098288}
+  lever2: {fileID: 731016669}
+  lever3: {fileID: 578741133}
+  lever4: {fileID: 1429444122}
+  lever5: {fileID: 65066407}
+--- !u!4 &639700518
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 639700516}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.31, y: -15.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 30
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &731016665
 GameObject:
   m_ObjectHideFlags: 0
@@ -1098,8 +1135,8 @@ GameObject:
   m_Component:
   - component: {fileID: 731016667}
   - component: {fileID: 731016666}
-  - component: {fileID: 731016668}
   - component: {fileID: 731016669}
+  - component: {fileID: 731016668}
   m_Layer: 0
   m_Name: Lever2
   m_TagString: Switch
@@ -1174,22 +1211,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 731016665}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca80dfa9d2dce44a0862a535688014, type: 3}
+  m_Script: {fileID: 11500000, guid: 11a1036d278e66b4cb6d3b1082bdf117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever1_on: 0
-  lever2_on: 0
-  lever3_on: 0
-  lever4_on: 0
-  lever5_on: 0
-  platformSpeed: 3
-  hideDown: -7.3
-  hideUp: 2.5
-  p1_stop: -0.55
-  p2_stop: -0.55
-  p3_stop: -0.36
-  p4_stop: 0.3
-  p5_stop: 0.87
 --- !u!61 &731016669
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1397,8 +1421,8 @@ GameObject:
   m_Component:
   - component: {fileID: 786098286}
   - component: {fileID: 786098285}
-  - component: {fileID: 786098287}
   - component: {fileID: 786098288}
+  - component: {fileID: 786098287}
   m_Layer: 0
   m_Name: Lever1
   m_TagString: Switch
@@ -1473,22 +1497,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 786098284}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca80dfa9d2dce44a0862a535688014, type: 3}
+  m_Script: {fileID: 11500000, guid: 11a1036d278e66b4cb6d3b1082bdf117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever1_on: 0
-  lever2_on: 0
-  lever3_on: 0
-  lever4_on: 0
-  lever5_on: 0
-  platformSpeed: 3
-  hideDown: -7.3
-  hideUp: 2.5
-  p1_stop: -0.55
-  p2_stop: -0.55
-  p3_stop: -0.36
-  p4_stop: 0.3
-  p5_stop: 0.87
 --- !u!61 &786098288
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1572,7 +1583,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -2322,8 +2333,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1429444120}
   - component: {fileID: 1429444119}
-  - component: {fileID: 1429444121}
   - component: {fileID: 1429444122}
+  - component: {fileID: 1429444121}
   m_Layer: 0
   m_Name: Lever4
   m_TagString: Switch
@@ -2398,22 +2409,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1429444118}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6ca80dfa9d2dce44a0862a535688014, type: 3}
+  m_Script: {fileID: 11500000, guid: 11a1036d278e66b4cb6d3b1082bdf117, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lever1_on: 0
-  lever2_on: 0
-  lever3_on: 0
-  lever4_on: 0
-  lever5_on: 0
-  platformSpeed: 3
-  hideDown: -7.3
-  hideUp: 2.5
-  p1_stop: -0.55
-  p2_stop: -0.55
-  p3_stop: -0.36
-  p4_stop: 0.3
-  p5_stop: 0.87
 --- !u!61 &1429444122
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2700,6 +2698,16 @@ Prefab:
       propertyPath: m_Name
       value: Pu
       objectReference: {fileID: 0}
+    - target: {fileID: 61565036041219910, guid: 4de41e79f46cd4d4f8c329bd2b2eaeec,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: 0.21068287
+      objectReference: {fileID: 0}
+    - target: {fileID: 61565036041219910, guid: 4de41e79f46cd4d4f8c329bd2b2eaeec,
+        type: 2}
+      propertyPath: m_Size.x
+      value: 0.592556
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4de41e79f46cd4d4f8c329bd2b2eaeec, type: 2}
   m_IsPrefabAsset: 0
@@ -2818,7 +2826,7 @@ EdgeCollider2D:
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
-  m_UsedByEffector: 1
+  m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_EdgeRadius: 0
@@ -3078,10 +3086,12 @@ MonoBehaviour:
   grounded: 0
   onLadder: 0
   onMoveableObject: 0
+  nextToMoveableObject: 0
   onSwitch: 0
   climb: 0
   moveObject: 0
   interact: 0
+  drag: 0
   flippedRight: 0
   jumping: 0
 --- !u!114 &1916525515
