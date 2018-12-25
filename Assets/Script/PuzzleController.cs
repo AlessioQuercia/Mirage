@@ -2,12 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PuzzleController : MonoBehaviour {
-
-    private bool platformsTravelling = false;
-    public float platformTravelTime = 3f;
-
-    private PlatformController[] platformControllers;
+public abstract class PuzzleController : MonoBehaviour {
 
     private bool isActive = true;
 
@@ -17,37 +12,25 @@ public class PuzzleController : MonoBehaviour {
         {
             return isActive;
         }
-    }
 
-    public bool getPlatformsTravelling()
-    {
-        return platformsTravelling;
-    }
-
-    public void setPlatformsTravelling(bool value)
-    {
-        platformsTravelling = value;
-    }
-
-    // Use this for initialization
-    void Start () {
-        platformControllers = GetComponentsInChildren<PlatformController>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        int numberOfPlatforms = platformControllers.Length;
-        int platformCounter = 0;
-		foreach (PlatformController platformController in platformControllers)
+        set
         {
-            if (platformController.isDown())
-            {
-                platformCounter++;
-            }
+            isActive = value;
         }
-        if(platformCounter == numberOfPlatforms)
+    }
+
+    public bool IsBusy
+    {
+        get
         {
-            isActive = false;
+            return isBusy;
         }
-	}
+
+        set
+        {
+            isBusy = value;
+        }
+    }
+
+    private bool isBusy;
 }

@@ -20,7 +20,7 @@ public class Camera32 : MonoBehaviour
     private bool zoomOut = false;
 
     private Transform playerTransform;
-    private PuzzleController puzzle;
+    private PuzzlePlatformController puzzle;
 
     void Awake()
     {
@@ -34,7 +34,7 @@ public class Camera32 : MonoBehaviour
         cameraObject.transform.position = new Vector3(startPositionX, startPositionY, 0);
         Camera.main.orthographicSize = minOrthographicSize;
 
-        puzzle = GameObject.Find("Puzzle").GetComponent<PuzzleController>();
+        puzzle = GameObject.Find("Puzzle").GetComponent<PuzzlePlatformController>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
