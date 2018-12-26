@@ -34,6 +34,7 @@ public class MoveableZone : MonoBehaviour {
     {
         if (col.gameObject.tag == "Player")
         {
+//            player.isDead = true;
             player.onMoveableObject = true;
             
             if (!playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()))
@@ -58,28 +59,28 @@ public class MoveableZone : MonoBehaviour {
         if (player.onMoveableObject && !playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()) 
                                     && Input.GetKeyDown(KeyCode.E))
         {
-            player.moveObject = true;
+            player.movingObject = true;
             if (player.flippedRight)
-                moveableObjectPosition = 1.23f;
+                moveableObjectPosition = 0.89f;
             else
-                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.37f;
+                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.033f;
         }    
 		
-        if (player.moveObject && Input.GetKeyUp(KeyCode.E))
+        if (player.movingObject && Input.GetKeyUp(KeyCode.E))
         {
             canRelease = true;
         }
 		
-        if (player.moveObject && canRelease && Input.GetKeyDown(KeyCode.E))
+        if (player.movingObject && canRelease && Input.GetKeyDown(KeyCode.E))
         {
-            player.moveObject = false;
+            player.movingObject = false;
             canRelease = false;
         }
     }
 
     private void FixedUpdate()
     {
-        if (player.moveObject)
+        if (player.movingObject)
         {
             float h = Input.GetAxis("Horizontal");
 //            player.onMoveableObject = true;

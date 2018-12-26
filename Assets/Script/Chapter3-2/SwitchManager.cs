@@ -74,7 +74,7 @@ public class SwitchManager : MonoBehaviour
             String leverName = getLeverName();
             turn(leverName);
             activateLever(leverName);
-            player.interact = true;
+            player.interacting = true;
         }
 
         if (p1_toStop && (p1rb.velocity.y > 0 && p1rb.position.y >= p1_stop ||

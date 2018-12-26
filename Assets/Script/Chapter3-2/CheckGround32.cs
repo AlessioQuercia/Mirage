@@ -24,7 +24,7 @@ public class CheckGround32 : MonoBehaviour
         if ((col.gameObject.tag == "Ground" || col.gameObject.tag == "Moveable")
            && col.contacts[0].point.y <= col.contacts[0].otherCollider.bounds.min.y)
         {
-            player.grounded = true;
+            player.jumping = false;
         }
     }
 
@@ -32,13 +32,13 @@ public class CheckGround32 : MonoBehaviour
     {
         if (col.gameObject.tag == "Ground")
         {
-            player.grounded = false;
+            player.jumping = true;
         }
 
         if (col.gameObject.tag == "Moveable" && !playerRayastRightCollider.IsTouching(col.collider)
                                              && !playerRayastLeftCollider.IsTouching(col.collider))
         {
-            player.grounded = false;
+            player.jumping = true;
         }
     }
 }

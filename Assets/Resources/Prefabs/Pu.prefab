@@ -1038,7 +1038,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1009480783587182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -13.3, y: -3.66, z: 0.23414148}
+  m_LocalPosition: {x: -8.68, y: -3.66, z: 0.23414148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4992154047864522}
@@ -1477,7 +1477,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.27780056, y: 0.31074512}
+  m_Offset: {x: 0.27251863, y: 0.31074512}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1488,7 +1488,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.5823231, y: 0.5496919}
+  m_Size: {x: 0.5295038, y: 0.5496919}
   m_EdgeRadius: 0
 --- !u!61 &61379479199377810
 BoxCollider2D:
@@ -1538,7 +1538,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.60515213, y: 0.45397758}
+  m_Size: {x: 0.5641022, y: 0.45397758}
   m_EdgeRadius: 0
 --- !u!61 &61570850085105674
 BoxCollider2D:
@@ -1552,7 +1552,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.29860163, y: 0.2067188}
+  m_Offset: {x: 0.30353355, y: 0.19192266}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1563,7 +1563,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.53986454, y: 1.8686512}
+  m_Size: {x: 0.5300007, y: 1.7996035}
   m_EdgeRadius: 0
 --- !u!61 &61714240733041300
 BoxCollider2D:
@@ -1577,7 +1577,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.21758032, y: 0.3023466}
+  m_Offset: {x: 0.21758032, y: 0.31221044}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1588,7 +1588,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.52930355, y: 1.7842987}
+  m_Size: {x: 0.52930355, y: 1.7251146}
   m_EdgeRadius: 0
 --- !u!95 &95386346971134772
 Animator:
@@ -1646,15 +1646,19 @@ MonoBehaviour:
   climbSpeed: 3
   climbVelocity: 0
   gravityStore: 0
-  grounded: 0
+  jumping: 0
   onLadder: 0
   onMoveableObject: 0
+  nextToMoveableObject: 0
   onSwitch: 0
-  climb: 0
-  moveObject: 0
-  interact: 0
+  climbing: 0
+  movingObject: 0
+  interacting: 0
+  dragging: 0
   flippedRight: 0
-  jumping: 0
+  jumped: 0
+  isDead: 0
+  disabledMovements: 0
 --- !u!114 &114078141785825840
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2048,7 +2052,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 0.1}
-  m_Length: 7.000002
+  m_Length: 7.000003
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 4143997911690748}
   m_AttachedIK: {fileID: 0}

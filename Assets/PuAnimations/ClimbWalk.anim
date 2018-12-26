@@ -18,7 +18,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: {x: 0, y: -83.42, z: 0}
+        value: {x: 0, y: -70, z: 0}
         inSlope: {x: 0, y: 0, z: 0}
         outSlope: {x: 0, y: 0, z: 0}
         tangentMode: 0
@@ -6331,7 +6331,7 @@ AnimationClip:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: -83.42
+        value: -70
         inSlope: 0
         outSlope: 0
         tangentMode: 136
@@ -23141,8 +23141,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.x
-    path: 
+    attribute: m_LocalEulerAngles.z
+    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23152,7 +23152,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: 
+    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23161,8 +23161,8 @@ AnimationClip:
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4
-    attribute: m_LocalEulerAngles.z
-    path: 
+    attribute: m_LocalEulerAngles.x
+    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23442,7 +23442,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.x
-    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23452,7 +23452,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.y
-    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
+    path: 
     classID: 4
     script: {fileID: 0}
   - curve:
@@ -23462,7 +23462,7 @@ AnimationClip:
       m_PostInfinity: 2
       m_RotationOrder: 4
     attribute: m_LocalEulerAngles.z
-    path: Bones/Hip/Torso/Left Arm 1/Left Arm 2/Left Arm Line 1
+    path: 
     classID: 4
     script: {fileID: 0}
   m_HasGenericRootTransform: 1
