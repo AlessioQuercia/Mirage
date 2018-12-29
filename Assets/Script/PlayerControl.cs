@@ -81,6 +81,7 @@ public class PlayerControl : MonoBehaviour {
             if(this.transform.position.x > -4)
             {
                 SceneManager.LoadScene("Chapter3-2");
+//                GameController.instance.LoadNextScene();
             }
             
             mov = new Vector3(

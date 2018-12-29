@@ -5,11 +5,11 @@ using System.Diagnostics;
 using System.Runtime.Remoting;
 using UnityEngine;
 
-public class SwitchZone : MonoBehaviour
+public class SwitchManager : MonoBehaviour
 {
 
     private PlayerControl32 player;
-
+    
     public bool lever1_on;
     public bool lever2_on;
     public bool lever3_on;
@@ -19,7 +19,7 @@ public class SwitchZone : MonoBehaviour
     public float platformSpeed = 3f;
 
     public float hideDown = -7.3f;
-    public float hideUp = 20f;
+    public float hideUp = 2.5f;
 
     private float p1_x; // = -10.83f;
     private float p2_x; // = -6.53f;
@@ -33,17 +33,19 @@ public class SwitchZone : MonoBehaviour
     public float p4_stop = 0.3f;
     public float p5_stop = 0.87f;
 
-    private Rigidbody2D p1rb;
-    private Rigidbody2D p2rb;
-    private Rigidbody2D p3rb;
-    private Rigidbody2D p4rb;
-    private Rigidbody2D p5rb;
+    [Header("Platforms")]
+    public Rigidbody2D p1rb;
+    public Rigidbody2D p2rb;
+    public Rigidbody2D p3rb;
+    public Rigidbody2D p4rb;
+    public Rigidbody2D p5rb;
 
-    private Collider2D lever1;
-    private Collider2D lever2;
-    private Collider2D lever3;
-    private Collider2D lever4;
-    private Collider2D lever5;
+    [Header("Levers")]
+    public Collider2D lever1;
+    public Collider2D lever2;
+    public Collider2D lever3;
+    public Collider2D lever4;
+    public Collider2D lever5;
 
     private bool p1_toStop;
     private bool p2_toStop;
@@ -57,39 +59,11 @@ public class SwitchZone : MonoBehaviour
     {
         player = FindObjectOfType<PlayerControl32>();
 
-        p1rb = GameObject.Find("Platform1").GetComponent<Rigidbody2D>();
-        p2rb = GameObject.Find("Platform2").GetComponent<Rigidbody2D>();
-        p3rb = GameObject.Find("Platform3").GetComponent<Rigidbody2D>();
-        p4rb = GameObject.Find("Platform4").GetComponent<Rigidbody2D>();
-        p5rb = GameObject.Find("Platform5").GetComponent<Rigidbody2D>();
-
-        lever1 = GameObject.Find("Lever1").GetComponent<Collider2D>();
-        lever2 = GameObject.Find("Lever2").GetComponent<Collider2D>();
-        lever3 = GameObject.Find("Lever3").GetComponent<Collider2D>();
-        lever4 = GameObject.Find("Lever4").GetComponent<Collider2D>();
-        lever5 = GameObject.Find("Lever5").GetComponent<Collider2D>();
-
         p1_x = p1rb.transform.position.x;
         p2_x = p2rb.transform.position.x;
         p3_x = p3rb.transform.position.x;
         p4_x = p4rb.transform.position.x;
         p5_x = p5rb.transform.position.x;
-    }
-
-    private void OnTriggerStay2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-            player.onSwitch = true;
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.tag == "Player")
-        {
-            player.onSwitch = false;
-        }
     }
 
     // Update is called once per frame
@@ -172,32 +146,38 @@ public class SwitchZone : MonoBehaviour
 
     private void turn(String leverName)
     {
+        GameObject selectedLever = null;
         switch (leverName)
         {
             case "Lever1":
                 lever1_on = !lever1_on;
+                selectedLever = lever1.gameObject;
                 break;
 
             case "Lever2":
                 lever2_on = !lever2_on;
+                selectedLever = lever2.gameObject;
                 break;
 
             case "Lever3":
                 lever3_on = !lever3_on;
+                selectedLever = lever3.gameObject;
                 break;
 
             case "Lever4":
                 lever4_on = !lever4_on;
+                selectedLever = lever4.gameObject;
                 break;
 
             case "Lever5":
                 lever5_on = !lever5_on;
+                selectedLever = lever5.gameObject;
                 break;
         }
-        if (transform.localScale.x == 1)
-            transform.localScale = new Vector3(-1f, 1f, 1f);
-        else if (transform.localScale.x == -1)
-            transform.localScale = new Vector3(1f, 1f, 1f);
+        if (selectedLever.transform.localScale.x == 1)
+            selectedLever.transform.localScale = new Vector3(-1f, 1f, 1f);
+        else if (selectedLever.transform.localScale.x == -1)
+            selectedLever.transform.localScale = new Vector3(1f, 1f, 1f);
     }
 
     private String getLeverName()
