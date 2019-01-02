@@ -237,7 +237,7 @@ public class PlayerControl32 : MonoBehaviour
             anim.SetBool("climbing", climbing);
 
             anim.SetBool("movingObject", movingObject);
-
+            
             anim.SetBool("dragging", dragging);
 
             anim.SetBool("jumping", jumping);

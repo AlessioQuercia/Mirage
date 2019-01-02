@@ -5,13 +5,16 @@ using System.IO;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class GameController : MonoBehaviour
 {
 
 	public static GameController instance;
+	
+	public CinemachineVirtualCamera vcam;
 
-	private PlayerControl32 player;
+	public PlayerControl32 player;
 	
     private GameObject gameOverText;
     private GameObject leftDoor;
@@ -50,7 +53,7 @@ public class GameController : MonoBehaviour
 		else if (instance != this)
 			Destroy(gameObject);
 		
-		DontDestroyOnLoad(gameObject);
+//		DontDestroyOnLoad(gameObject);
 	}
 
 	// Use this for initialization
@@ -70,7 +73,7 @@ public class GameController : MonoBehaviour
 					player.transform.position.z);
 			}
 			
-			if (leftDoor.gameObject.transform.position.x < Camera.main.gameObject.transform.position.x - leftDoorClosedX)
+			if (leftDoor.gameObject.transform.position.x < vcam.gameObject.transform.position.x - leftDoorClosedX)
 			{
 				leftDoor.gameObject.transform.position = new Vector3(leftDoor.gameObject.transform.position.x + doorDeltaX,
 					leftDoor.gameObject.transform.position.y, doorDepth);
@@ -82,7 +85,7 @@ public class GameController : MonoBehaviour
 //				print("leftClosed: " + (Camera.main.transform.position.x - leftDoor.transform.position.x));
 			}
 
-			if (rightDoor.gameObject.transform.position.x > Camera.main.gameObject.transform.position.x - rightDoorClosedX)
+			if (rightDoor.gameObject.transform.position.x > vcam.gameObject.transform.position.x - rightDoorClosedX)
 			{
 				rightDoor.gameObject.transform.position = new Vector3(rightDoor.gameObject.transform.position.x - doorDeltaX,
 					rightDoor.gameObject.transform.position.y, doorDepth);
@@ -126,7 +129,7 @@ public class GameController : MonoBehaviour
 														player.transform.position.z);
 			}
 			
-			if (leftDoor.transform.position.x >= Camera.main.gameObject.transform.position.x - leftDoorOpenX)
+			if (leftDoor.transform.position.x >= vcam.gameObject.transform.position.x - leftDoorOpenX)
 			{
 				leftDoor.transform.position = new Vector3(leftDoor.gameObject.transform.position.x - doorDeltaX,
 					leftDoor.gameObject.transform.position.y, doorDepth);
@@ -137,7 +140,7 @@ public class GameController : MonoBehaviour
 				leftDoor.SetActive(false);
 			}
 			
-			if (rightDoor.transform.position.x <= Camera.main.gameObject.transform.position.x + rightDoorOpenX)
+			if (rightDoor.transform.position.x <= vcam.gameObject.transform.position.x + rightDoorOpenX)
 			{
 				rightDoor.transform.position = new Vector3(rightDoor.transform.position.x + doorDeltaX,
 					rightDoor.transform.position.y, doorDepth);
@@ -153,6 +156,7 @@ public class GameController : MonoBehaviour
 				opening = false;
 				load = false;
 				player.disabledMovements = false;
+				vcam.Follow = player.gameObject.transform;
 			}
 		}
 	}
@@ -165,12 +169,12 @@ public class GameController : MonoBehaviour
 
 	public void LoadScene()
 	{
-		Camera.main.transform.position = new Vector3(player.transform.position.x, 
-			player.transform.position.y + 2.7f, Camera.main.transform.position.z);
-		leftDoor.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - leftDoorClosedX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
-		rightDoor.gameObject.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - rightDoorClosedX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
+//		Camera.main.transform.position = new Vector3(player.transform.position.x, 
+//			player.transform.position.y + 2.7f, Camera.main.transform.position.z);
+		leftDoor.gameObject.transform.position = new Vector3(vcam.gameObject.transform.position.x - leftDoorClosedX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+		rightDoor.gameObject.transform.position = new Vector3(vcam.gameObject.transform.position.x - rightDoorClosedX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
 		gameOverText.SetActive(false);
 		leftDoor.gameObject.SetActive(true);
 		rightDoor.gameObject.SetActive(true);
@@ -210,8 +214,8 @@ public class GameController : MonoBehaviour
 
 	public void OpenDoors()
 	{
-		if (player == null)
-			player = FindObjectOfType<PlayerControl32>();
+//		if (player == null)
+//			player = FindObjectOfType<PlayerControl32>();
 		
 		if (gameOverText == null)
 			gameOverText = Instantiate(Resources.Load("Prefabs/GameOverText")) as GameObject;
@@ -221,14 +225,15 @@ public class GameController : MonoBehaviour
 		
 		if (rightDoor == null)
 			rightDoor = Instantiate(Resources.Load("Prefabs/RightStageDoor")) as GameObject;
+
+
+		vcam.transform.position = new Vector3(player.transform.position.x, 
+			vcam.transform.position.y, vcam.transform.position.z);
 		
-		
-		Camera.main.transform.position = new Vector3(player.transform.position.x, 
-			Camera.main.transform.position.y, Camera.main.transform.position.z);
-		leftDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - leftDoorClosedX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
-		rightDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - rightDoorClosedX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
+		leftDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - leftDoorClosedX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+		rightDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - rightDoorClosedX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
 			
 		gameOverText.SetActive(false);
 		leftDoor.SetActive(true);
@@ -246,8 +251,8 @@ public class GameController : MonoBehaviour
 
 	private void CloseDoors()
 	{
-		if (player == null)
-			player = FindObjectOfType<PlayerControl32>();
+//		if (player == null)
+//			player = FindObjectOfType<PlayerControl32>();
 		
 		if (gameOverText == null)
 			gameOverText = Instantiate(Resources.Load("Prefabs/GameOverText")) as GameObject;
@@ -258,18 +263,20 @@ public class GameController : MonoBehaviour
 		if (rightDoor == null)
 			rightDoor = Instantiate(Resources.Load("Prefabs/RightStageDoor")) as GameObject;
 		
-		leftDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - leftDoorOpenX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
-		rightDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x + rightDoorOpenX,
-			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
-		gameOverText.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - gameOverX, 
-			Camera.main.gameObject.transform.position.y - gameOverY, gameOverZ);
+		leftDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - leftDoorOpenX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+		rightDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x + rightDoorOpenX,
+			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+		gameOverText.transform.position = new Vector3(vcam.gameObject.transform.position.x - gameOverX, 
+			vcam.gameObject.transform.position.y - gameOverY, gameOverZ);
 			
 		leftDoor.SetActive(true);
 		rightDoor.SetActive(true);
 
 		player.disabledMovements = true;
 		player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0 , 0);
+
+		vcam.Follow = null;
 		
 		closing = true;
 	}
