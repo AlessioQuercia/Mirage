@@ -6,9 +6,9 @@ TagManager:
   tags:
   - Switch
   - Ground
-  - Moveable
   - Stairs
   - StageDoor
+  - MoveableObject
   layers:
   - Default
   - TransparentFX
