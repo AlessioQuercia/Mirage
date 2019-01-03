@@ -417,7 +417,8 @@ namespace Anima2D
 						string value = AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(SpriteUtility.GetSpriteTexture(spriteMesh.sprite,false)));
 						
 						s_SpriteMeshToTextureCache[key] = value;
-					}else{
+					}
+					else{
 						Debug.LogWarning("Anima2D: SpriteMesh " + spriteMesh.name + " uses the same Sprite as " + spriteMeshFromSprite.name + ". Use only one SpriteMesh per Sprite.");
 					}
 					
