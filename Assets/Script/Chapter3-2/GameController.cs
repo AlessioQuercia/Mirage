@@ -156,7 +156,7 @@ public class GameController : MonoBehaviour
 				opening = false;
 				load = false;
 				player.disabledMovements = false;
-				vcam.Follow = player.gameObject.transform;
+				vcam.Follow = player.CenterPosition;
 			}
 		}
 	}
