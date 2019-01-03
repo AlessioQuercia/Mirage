@@ -2280,15 +2280,19 @@ MonoBehaviour:
   climbSpeed: 3
   climbVelocity: 0
   gravityStore: 0
-  grounded: 0
+  jumping: 0
   onLadder: 0
   onMoveableObject: 0
+  nextToMoveableObject: 0
   onSwitch: 0
-  climb: 0
-  moveObject: 0
-  interact: 0
+  climbing: 0
+  movingObject: 0
+  interacting: 0
+  dragging: 0
   flippedRight: 0
-  jumping: 0
+  jumped: 0
+  isDead: 0
+  disabledMovements: 0
 --- !u!114 &114779089158195930
 MonoBehaviour:
   m_ObjectHideFlags: 1

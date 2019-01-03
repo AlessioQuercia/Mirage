@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +13,8 @@ public class PlayerController : MonoBehaviour
     // Raycasts for environment detection
     RaycastHit2D frontRaycastHit;
     float frontRaycastDistance = 0.5f;
+    RaycastHit2D upperRaycastHit;
+    float upperRaycastDistance = 0.5f;
     Vector3 raycastsInitialPosition;
 
     // Public movement variables
@@ -24,8 +27,9 @@ public class PlayerController : MonoBehaviour
     public bool onPickable = false;
     public bool onDialogue = false;
     public bool onLadder = false;
+    public bool isClimbing = false;
     public bool onSwitch = false;
-    public bool interact = false;       // Does it have to be a public, as it is called from Pu but by another script ?
+    public bool interact = false;
 
     // Other public components
     public bool checkInventory = false;
@@ -41,6 +45,8 @@ public class PlayerController : MonoBehaviour
 
     // Inner interaction variables
     bool isDragging = false;
+    public bool onGround = false;
+    Collider2D currentLadderCollider = null;
     bool isBusy = false;
 
     // Other inner variables
@@ -63,6 +69,7 @@ public class PlayerController : MonoBehaviour
         Physics2D.queriesStartInColliders = false;
         raycastsInitialPosition = new Vector3(transform.position.x, transform.position.y - 0.3f, transform.position.z);
         frontRaycastHit = Physics2D.Raycast(raycastsInitialPosition, Vector2.right * transform.localScale.x, frontRaycastDistance);
+        upperRaycastHit = Physics2D.Raycast(raycastsInitialPosition, Vector2.up, upperRaycastDistance);
 
         // Initializing animations
         animator.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
@@ -71,7 +78,11 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown("Jump"))
         {
             jump = true;
-            animator.SetBool("grounded", false);    // To be changed for a more logical term
+
+            if (!isBusy)
+            {
+                animator.SetBool("jumping", true);
+            }
         }
 
         if (Input.GetButtonDown("Crouch"))      // Crouching is useless for now
@@ -118,24 +129,51 @@ public class PlayerController : MonoBehaviour
     // To stop the jumping animation
     public void OnLanding()
     {
-        animator.SetBool("grounded", true);
+        animator.SetBool("jumping", false);
     }
 
-    // Getting what the player is touching
+    // Getting the objects that the player is touching
     public void OnCollisionEnter2D (Collision2D col)
     {
         if (col.gameObject.tag == "MoveableObject")
         {
             onMoveableObject = true;
         }
+        if (col.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
     }
 
-    // Getting what the player is not touching anymore
+    // Getting the objects that the player is not touching anymore
     void OnCollisionExit2D(Collision2D col)
     {
         if (col.gameObject.tag == "MoveableObject")
         {
             onMoveableObject = false;
+        }
+        if (col.gameObject.tag == "Ground")
+        {
+            onGround = false;
+        }
+    }
+
+    // Getting the trigggers that the player is touching
+    public void OnTriggerEnter2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Ladder")
+        {
+            currentLadderCollider = col;
+            onLadder = true;
+        }
+    }
+
+    // Getting the triggers that the player is not touching anymore
+    void OnTriggerExit2D(Collider2D col)
+    {
+        if (col.gameObject.tag == "Ladder")
+        {
+            onLadder = false;
         }
     }
 
@@ -162,6 +200,8 @@ public class PlayerController : MonoBehaviour
                 {
                     Destroy(GetComponent("HingeJoint2D"));
                     frontRaycastHit.collider.gameObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
+                    animator.SetBool("movingObject", false);
+                    animator.SetBool("dragging", false);
                     isDragging = false;
                     isBusy = false;
                 }
@@ -169,6 +209,12 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     controller.Move(horizontalMove * Time.fixedDeltaTime, false, false, false);
+
+                    // Setting the right dragging animation depending on the direction the player is facing
+                    if (controller.m_FacingRight && horizontalMove < 0 || !controller.m_FacingRight && horizontalMove > 0)
+                        animator.SetBool("dragging", true);
+                    else
+                        animator.SetBool("dragging", false);
                 }
             }
 
@@ -177,18 +223,56 @@ public class PlayerController : MonoBehaviour
             {
                 StartCoroutine(PickUp());
             }
+
+            // Talk to PNGs
             else if (!isBusy && onDialogue && interact)
             {
                 StartCoroutine(Talk());
             }
-            else if (!isBusy && onLadder && (verticalMove != 0))
+
+            // Climb up/down a Ladder
+            else if (isClimbing || !isBusy && onLadder && verticalMove != 0)
             {
-                StartCoroutine(Climb());
+                // First loop : make the player get on the ladder
+                if (!isClimbing)
+                {
+                    isInControl = false;
+                    if (upperRaycastHit.collider != null && upperRaycastHit.collider.gameObject.tag == "Ladder")
+                    {
+                        // The player is at the bottom of the ladder
+                        StartCoroutine(StartClimbing(currentLadderCollider, false));
+                    }
+                    else
+                    {
+                        // The player is on top of the ladder
+                        StartCoroutine(StartClimbing(currentLadderCollider, true));
+                    }
+                    isClimbing = true;
+                    isBusy = true;
+                }
+                else if (!onLadder || onGround)
+                {
+                    rb2d.gravityScale = 0;
+                    rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+                    isClimbing = false;
+                    isBusy = false;
+                    animator.SetBool("climbing", false);
+                }
+                // As long as the player is climbing the object :
+                else
+                {
+                    rb2d.velocity = new Vector2(0, verticalMove);
+                    animator.SetFloat("vSpeed", rb2d.velocity.y);
+                }
             }
+
+            // To be removed ?
             else if (!isBusy && checkInventory)
             {
                 StartCoroutine(Inventory());
             }
+
+            // Normal movement
             else if (!isBusy)
             {
                 // Moving the character
@@ -202,6 +286,7 @@ public class PlayerController : MonoBehaviour
         checkInventory = false;
     }
 
+    // Coroutine to make the initialize the dragging procedure
     IEnumerator StartDragging(GameObject moveableObject)
     {
         while (onMoveableObject == false)
@@ -213,6 +298,7 @@ public class PlayerController : MonoBehaviour
         HingeJoint2D draggingJoint = (HingeJoint2D)gameObject.AddComponent<HingeJoint2D>();
         draggingJoint.connectedBody = moveableObject.GetComponent<Rigidbody2D>();
         moveableObject.GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        animator.SetBool("movingObject", true);
         isInControl = true;
     }
 
@@ -231,10 +317,49 @@ public class PlayerController : MonoBehaviour
         yield return null;
     }
 
-    IEnumerator Climb()
+    // Coroutine to make the initialize the climbing procedure
+    IEnumerator StartClimbing(Collider2D ladder, bool playerEntersOnTop)
     {
         // Move in the middle of the ladder
-        yield return null;
+        float target = (ladder.gameObject.transform.position.x) + (ladder.offset.x);
+        if (Math.Abs(target - (transform.position.x + GetComponent<BoxCollider2D>().offset.x)) <= GetComponent<BoxCollider2D>().offset.x)
+        {
+            // Do nothing, the player is quite in the middle of the ladder already
+        }
+        else if ((transform.position.x + GetComponent<BoxCollider2D>().offset.x) <= target)
+        {
+            // The player is too much on the left
+            while ((transform.position.x + GetComponent<BoxCollider2D>().offset.x) < target - 0.1f)
+            {
+                controller.Move(movementSpeed * Time.fixedDeltaTime, false, false, true);
+                yield return null;
+            }
+        }
+        else
+        {
+            // The player is too much on the right
+            while ((transform.position.x - GetComponent<BoxCollider2D>().offset.x) > target + 0.1f)
+            {
+                controller.Move((-1) * movementSpeed * Time.fixedDeltaTime, false, false, true);
+                yield return null;
+            }
+        }
+        rb2d.gravityScale = 0;
+        rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
+        animator.SetBool("climbing", true);
+        if (playerEntersOnTop)
+        {
+            int delay = 60;
+            while (delay != 0)
+            {
+                delay -= 1;
+                rb2d.velocity = new Vector2(0, -climbingSpeed);
+                animator.SetFloat("vSpeed", rb2d.velocity.y);
+                yield return null;
+            }
+        }
+        //Set the vertical animation
+        isInControl = true;
     }
 
     IEnumerator Inventory()
@@ -247,5 +372,6 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawLine(raycastsInitialPosition, raycastsInitialPosition + Vector3.right * transform.localScale.x * frontRaycastDistance);
+        Gizmos.DrawLine(raycastsInitialPosition, raycastsInitialPosition + Vector3.up * upperRaycastDistance);
     }
 }
