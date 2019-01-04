@@ -10,6 +10,8 @@ using UnityEngine.Serialization;
 public class PlayerControl32 : MonoBehaviour
 {
     //Mirage
+    [Header("Center Position")] 
+    public Transform CenterPosition;
     
     //Ray Casting
     [Header("Raycast Directions")]
@@ -70,7 +72,7 @@ public class PlayerControl32 : MonoBehaviour
 
         floorCollider = GameObject.Find("Floor").GetComponent<BoxCollider2D>();
 
-        hayCart = GameObject.Find("HayCart").GetComponent<Rigidbody2D>();
+        hayCart = GameObject.Find("Rock").GetComponent<Rigidbody2D>();
 
         gravityStore = rb2d.gravityScale;
 
