@@ -6,7 +6,7 @@ public class Camera32 : MonoBehaviour
     Transform target;
     Vector2 mov;
 
-    private PlayerControl32 player;
+    private PlayerController player;
 
     private float minCameraSize = 4.338718f;
     private float maxCameraSize = 9.845745f;
@@ -22,7 +22,7 @@ public class Camera32 : MonoBehaviour
 
     void Awake()
     {
-        player = FindObjectOfType<PlayerControl32>();
+        player = FindObjectOfType<PlayerController>();
         target = player.transform;
     }
 
