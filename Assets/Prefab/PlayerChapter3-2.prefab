@@ -2686,6 +2686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff0f6f4bed143e428c657e0f19d492e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CenterPosition: {fileID: 0}
   RaycastRight: {fileID: 4979358448290942}
   RaycastLeft: {fileID: 4452905778995826}
   RaycastUp: {fileID: 4890320278602506}
