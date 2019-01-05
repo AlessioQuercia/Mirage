@@ -13,17 +13,21 @@ public class GameController : MonoBehaviour
 	public static GameController instance;
 	
 	public CinemachineVirtualCamera vcam;
-
-	public PlayerController player;
 	
+	public PlayerController player;
+
     private GameObject gameOverText;
     private GameObject leftDoor;
     private GameObject rightDoor;
+	
+	[Header("Player Spawn")]
+	
+	public Transform spawnPoint; 
 
-	private float playerSpawningHeight = 10;
-	private float playerDespawningHeight = 10;
-	private float playerDespawningDeltaY = 0.3f;
-	private float playerSpawningDeltaY = 0.3f;
+	public float spawningHeight = 10;
+	public float despawningHeight = 10;
+	public float despawningDeltaY = 0.3f;
+	public float spawningDeltaY = 0.3f;
 
 	private float doorDeltaX = 0.2f;
 	private float doorDepth = -5;
@@ -38,6 +42,7 @@ public class GameController : MonoBehaviour
 	private float gameOverZ = -6f;
 	
 	
+	[Header("Game Info")]
     public bool gameOver;
 	public bool load;
 
@@ -75,10 +80,10 @@ public class GameController : MonoBehaviour
 		
 		if (closing)
 		{
-			if (player.transform.position.y <= playerDespawningHeight)
+			if (player.transform.position.y <= despawningHeight)
 			{
 				player.transform.position = new Vector3(player.transform.position.x,
-					player.transform.position.y + playerDespawningDeltaY,
+					player.transform.position.y + despawningDeltaY,
 					player.transform.position.z);
 			}
 			
@@ -134,7 +139,7 @@ public class GameController : MonoBehaviour
 			if (player.animator.GetBool("jumping"))
 			{
 				player.transform.position = new Vector3(player.transform.position.x,
-														player.transform.position.y - playerSpawningDeltaY,
+														player.transform.position.y - spawningDeltaY,
 														player.transform.position.z);
 			}
 			
@@ -233,6 +238,11 @@ public class GameController : MonoBehaviour
 			rightDoor = Instantiate(Resources.Load("Prefabs/RightStageDoor")) as GameObject;
 
 
+		player.isInControl = false;
+		player.transform.position = new Vector3(spawnPoint.position.x,
+			spawnPoint.position.y + spawningHeight,
+			spawnPoint.position.z);
+		
 		vcam.transform.position = new Vector3(player.transform.position.x, 
 			vcam.transform.position.y, vcam.transform.position.z);
 		
@@ -247,11 +257,6 @@ public class GameController : MonoBehaviour
 		leftDoor.GetComponent<StageDoor>().doorClosed = true;
 		rightDoor.GetComponent<StageDoor>().doorClosed = true;
 		
-		player.isInControl = false;
-		player.transform.position = new Vector3(player.transform.position.x,
-												player.transform.position.y + playerSpawningHeight,
-												player.transform.position.z);
-
 		opening = true;
 	}
 
