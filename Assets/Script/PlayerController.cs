@@ -14,10 +14,10 @@ public class PlayerController : MonoBehaviour
     RaycastHit2D frontRaycastHit;
     float frontRaycastDistance = 0.4f;
     RaycastHit2D upRaycastHit;
-    float upRaycastDistance = 0.5f;
+    float upRaycastDistance = 0.25f;
     RaycastHit2D downRaycastHit;
     float downRaycastDistance = 0.25f;
-    Vector3 raycastsInitialPosition;
+    Vector3 centrePointOfPlayer;
     Vector3 downRaycastsInitialPosition;
 
     // Public movement variables
@@ -62,12 +62,12 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         if (controller.m_FacingRight)
         {
-            raycastsInitialPosition = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.3f, transform.position.z);
+            centrePointOfPlayer = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.5f, transform.position.z);
             downRaycastsInitialPosition = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 1.25f, transform.position.z);
         }
         else
         {
-            raycastsInitialPosition = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.3f, transform.position.z);
+            centrePointOfPlayer = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.5f, transform.position.z);
             downRaycastsInitialPosition = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 1.25f, transform.position.z);
         }
     }
@@ -81,16 +81,16 @@ public class PlayerController : MonoBehaviour
         // Adjusting raycast position because the player object and its colliders are not aligned
         if (controller.m_FacingRight)
         {
-            raycastsInitialPosition = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.3f, transform.position.z);
+            centrePointOfPlayer = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.5f, transform.position.z);
             downRaycastsInitialPosition = new Vector3(transform.position.x + GetComponent<BoxCollider2D>().offset.x, transform.position.y - 1.25f, transform.position.z);
         }
         else
         {
-            raycastsInitialPosition = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.3f, transform.position.z);
+            centrePointOfPlayer = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 0.5f, transform.position.z);
             downRaycastsInitialPosition = new Vector3(transform.position.x - GetComponent<BoxCollider2D>().offset.x, transform.position.y - 1.25f, transform.position.z);
         }
-        frontRaycastHit = Physics2D.Raycast(raycastsInitialPosition, Vector2.right * transform.localScale.x, frontRaycastDistance);
-        upRaycastHit = Physics2D.Raycast(raycastsInitialPosition, Vector2.up, upRaycastDistance);
+        frontRaycastHit = Physics2D.Raycast(centrePointOfPlayer, Vector2.right * transform.localScale.x, frontRaycastDistance);
+        upRaycastHit = Physics2D.Raycast(centrePointOfPlayer, Vector2.up, upRaycastDistance);
         downRaycastHit = Physics2D.Raycast(downRaycastsInitialPosition, Vector2.down, downRaycastDistance);
 
         // Initializing animations
@@ -146,6 +146,8 @@ public class PlayerController : MonoBehaviour
 
         horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
         verticalMove = Input.GetAxisRaw("Vertical") * climbingSpeed;
+
+        // Debugs to be removed
         Debug.Log("Front raycast : " + frontRaycastHit.collider);
         Debug.Log("Up raycast : " + upRaycastHit.collider);
         Debug.Log("Down raycast : " + downRaycastHit.collider);
@@ -258,12 +260,12 @@ public class PlayerController : MonoBehaviour
                     if (downRaycastHit.collider != null && downRaycastHit.collider.gameObject.tag == "LadderFloor")
                     {
                         // The player is on top of the ladder
-                        StartCoroutine(StartClimbing(currentLadderCollider, true));
+                        StartCoroutine(StartClimbing(currentLadderCollider, downRaycastHit.collider));
                     }
                     else
                     {
                         // The player is at the bottom of the ladder
-                        StartCoroutine(StartClimbing(currentLadderCollider, false));
+                        StartCoroutine(StartClimbing(currentLadderCollider, null));
                     }
 
                     isClimbing = true;
@@ -285,7 +287,7 @@ public class PlayerController : MonoBehaviour
                     {
                         // The player is leaving the ladder from above
                         isInControl = false;
-                        StartCoroutine(StopClimbingOnTopOfLadder());
+                        StartCoroutine(StopClimbingOnTopOfLadder(upRaycastHit.collider));
                     }
                 }
                 // As long as the player is climbing
@@ -349,18 +351,18 @@ public class PlayerController : MonoBehaviour
     }
 
     // Coroutine to make the initialize the climbing procedure
-    IEnumerator StartClimbing(Collider2D ladder, bool playerEntersOnTop)
+    IEnumerator StartClimbing(Collider2D ladder, Collider2D ladderFloorCollider)
     {
         // Move in the middle of the ladder
         float target = (ladder.gameObject.transform.position.x) + (ladder.offset.x);
-        if (Math.Abs(target - (transform.position.x + GetComponent<BoxCollider2D>().offset.x)) <= GetComponent<BoxCollider2D>().offset.x)
+        if (Math.Abs(target - centrePointOfPlayer.x) <= GetComponent<BoxCollider2D>().offset.x)
         {
             // Do nothing, the player is quite in the middle of the ladder already
         }
         else if ((transform.position.x + GetComponent<BoxCollider2D>().offset.x) <= target)
         {
             // The player is too much on the left
-            while ((transform.position.x + GetComponent<BoxCollider2D>().offset.x) < target - 0.1f)
+            while ((centrePointOfPlayer.x) < target - 0.1f)
             {
                 controller.Move(movementSpeed * Time.fixedDeltaTime, false, false, true);
                 yield return null;
@@ -369,29 +371,40 @@ public class PlayerController : MonoBehaviour
         else
         {
             // The player is too much on the right
-            while ((transform.position.x - GetComponent<BoxCollider2D>().offset.x) > target + 0.1f)
+            while ((centrePointOfPlayer.x) > target + 0.1f)
             {
                 controller.Move((-1) * movementSpeed * Time.fixedDeltaTime, false, false, true);
                 yield return null;
             }
         }
+
+        // Sart climbing
         rb2d.gravityScale = 0;
         rb2d.constraints = RigidbodyConstraints2D.FreezePositionX | RigidbodyConstraints2D.FreezeRotation;
         animator.SetBool("climbing", true);
-        if (playerEntersOnTop)
+        if (ladderFloorCollider != null)
         {
-            int delay = 60;
+            // The player enters the ladder on top
+            // Set the animation
+            animator.SetBool("enterLadderFromAbove", true);
+
+            // Enter the ladder
+            ladderFloorCollider.isTrigger = true;
+            int delay = 40;
             while (delay != 0)
             {
                 delay -= 1;
                 rb2d.velocity = new Vector2(0, -climbingSpeed);
-                //Set the vertical animation
-                animator.SetFloat("vSpeed", rb2d.velocity.y);
+                //Set the entering ladder animation
                 yield return null;
             }
+
+            // End the animation
+            animator.SetBool("enterLadderFromAbove", false);
         }
         else
         {
+            // The player enters the ladder from the bottom
             int delay = 10;
             while (delay != 0)
             {
@@ -406,22 +419,31 @@ public class PlayerController : MonoBehaviour
     }
 
     // Coroutine to get out of a ladder on top of it
-    IEnumerator StopClimbingOnTopOfLadder()
+    IEnumerator StopClimbingOnTopOfLadder(Collider2D ladderFloorCollider)
     {
-        int delay = 30;
+        // Set the animation
+        animator.SetBool("climbing", false);
+        animator.SetBool("exitLadderFromAbove", true);
+
+        // Moving out of the ladder
+        int delay = 40;
         while (delay != 0)
         {
             delay -= 1;
             rb2d.velocity = new Vector2(0, climbingSpeed);
             //Set the vertical animation
-            animator.SetFloat("vSpeed", rb2d.velocity.y);
             yield return null;
         }
+
+        // End the animation
+        animator.SetBool("exitLadderFromAbove", false);
+
+        // Reestablish gravity and colliders
+        ladderFloorCollider.isTrigger = false;
         rb2d.gravityScale = 1;
         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         isClimbing = false;
         isBusy = false;
-        animator.SetBool("climbing", false);
         isInControl = true;
     }
 
@@ -434,8 +456,8 @@ public class PlayerController : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawLine(raycastsInitialPosition, raycastsInitialPosition + Vector3.right * transform.localScale.x * frontRaycastDistance);
-        Gizmos.DrawLine(raycastsInitialPosition, raycastsInitialPosition + Vector3.up * upRaycastDistance);
+        Gizmos.DrawLine(centrePointOfPlayer, centrePointOfPlayer + Vector3.right * transform.localScale.x * frontRaycastDistance);
+        Gizmos.DrawLine(centrePointOfPlayer, centrePointOfPlayer + Vector3.up * upRaycastDistance);
         Gizmos.DrawLine(downRaycastsInitialPosition, downRaycastsInitialPosition + Vector3.down * downRaycastDistance);
     }
 }

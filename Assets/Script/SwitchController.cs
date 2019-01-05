@@ -8,7 +8,7 @@ using UnityEngine;
 public class SwitchController : MonoBehaviour
 {
 
-    private PlayerControl32 player;
+    private PlayerController player;
 
     public float rotationSpeed;
 
@@ -33,7 +33,7 @@ public class SwitchController : MonoBehaviour
     {
         level = GameObject.FindObjectOfType<LevelController>();
 
-        player = FindObjectOfType<PlayerControl32>();
+        player = FindObjectOfType<PlayerController>();
         puzzleController = GetComponentInParent<PuzzlePlatformController>();
     }
 
@@ -63,13 +63,13 @@ public class SwitchController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (switchActive && Input.GetKeyDown(KeyCode.E) && (level.IsBusy || !puzzleController.IsActive))
+        if (switchActive && Input.GetButtonDown("Interact") && (level.IsBusy || !puzzleController.IsActive))
         {
             SpriteRenderer spriteRenderer = GetComponent<SpriteRenderer>();
             switchFlash = flashRed(spriteRenderer);
             StartCoroutine(switchFlash);
         }
-        else if (switchActive && Input.GetKeyDown(KeyCode.E) && !puzzleController.IsBusy && puzzleController.IsActive)
+        else if (switchActive && Input.GetButtonDown("Interact") && !puzzleController.IsBusy && puzzleController.IsActive)
         {
             puzzleController.IsBusy = true;
             activateLever();
