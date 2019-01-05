@@ -14,7 +14,7 @@ public class GameController : MonoBehaviour
 	
 	public CinemachineVirtualCamera vcam;
 
-	public PlayerControl32 player;
+	public PlayerController player;
 	
     private GameObject gameOverText;
     private GameObject leftDoor;
@@ -46,6 +46,8 @@ public class GameController : MonoBehaviour
 
 	private int sceneToLoad;
 
+	private bool sceneLoaded;
+
 	private void Awake()
 	{
 		if (instance == null)
@@ -57,13 +59,20 @@ public class GameController : MonoBehaviour
 	}
 
 	// Use this for initialization
-	void Start () 
+	void Start ()
 	{
+		sceneLoaded = true;
 	}
 	
 	// Update is called once per frame
 	void Update () 
-	{	
+	{
+		if (sceneLoaded)
+		{
+			OpenDoors();
+			sceneLoaded = false;
+		}
+		
 		if (closing)
 		{
 			if (player.transform.position.y <= playerDespawningHeight)
@@ -114,15 +123,15 @@ public class GameController : MonoBehaviour
 					SceneManager.LoadScene(sceneToLoad);
 					Save();
 					load = false;
+					sceneLoaded = true;
 					closing = false;
-					OpenDoors();
 				}
 			}
 		}
 		
 		else if (opening)
 		{ 
-			if (player.GetComponent<PlayerControl32>().jumping)
+			if (player.animator.GetBool("jumping"))
 			{
 				player.transform.position = new Vector3(player.transform.position.x,
 														player.transform.position.y - playerSpawningDeltaY,
@@ -155,8 +164,8 @@ public class GameController : MonoBehaviour
 			{
 				opening = false;
 				load = false;
-				player.disabledMovements = false;
-				vcam.Follow = player.CenterPosition;
+				player.isInControl = true;
+				vcam.Follow = player.transform;
 			}
 		}
 	}
@@ -214,9 +223,6 @@ public class GameController : MonoBehaviour
 
 	public void OpenDoors()
 	{
-//		if (player == null)
-//			player = FindObjectOfType<PlayerControl32>();
-		
 		if (gameOverText == null)
 			gameOverText = Instantiate(Resources.Load("Prefabs/GameOverText")) as GameObject;
 		
@@ -241,7 +247,7 @@ public class GameController : MonoBehaviour
 		leftDoor.GetComponent<StageDoor>().doorClosed = true;
 		rightDoor.GetComponent<StageDoor>().doorClosed = true;
 		
-		player.disabledMovements = true;
+		player.isInControl = false;
 		player.transform.position = new Vector3(player.transform.position.x,
 												player.transform.position.y + playerSpawningHeight,
 												player.transform.position.z);
@@ -251,9 +257,6 @@ public class GameController : MonoBehaviour
 
 	private void CloseDoors()
 	{
-//		if (player == null)
-//			player = FindObjectOfType<PlayerControl32>();
-		
 		if (gameOverText == null)
 			gameOverText = Instantiate(Resources.Load("Prefabs/GameOverText")) as GameObject;
 		
@@ -273,7 +276,7 @@ public class GameController : MonoBehaviour
 		leftDoor.SetActive(true);
 		rightDoor.SetActive(true);
 
-		player.disabledMovements = true;
+		player.isInControl = false;
 		player.GetComponent<Rigidbody2D>().velocity = new Vector3(0, 0 , 0);
 
 		vcam.Follow = null;
