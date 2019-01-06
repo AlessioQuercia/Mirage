@@ -19,7 +19,7 @@ public class CameraZoom : MonoBehaviour {
 	public float zoomDelta = 0.1f;
 
 	[Header("Camera Position")]
-	public float MinScreenY = 0.788f;
+	public float MinScreenY = 0.78f;
 	
 	public float MaxScreenY = 0.92f;
 	

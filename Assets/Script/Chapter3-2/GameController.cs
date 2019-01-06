@@ -40,6 +40,9 @@ public class GameController : MonoBehaviour
 	private float gameOverX = 13.5f;
 	private float gameOverY = 6f;
 	private float gameOverZ = -6f;
+
+	private Transform originalCameraFollow;
+	private bool originalCameraFollowSaved;
 	
 	
 	[Header("Game Info")]
@@ -76,6 +79,41 @@ public class GameController : MonoBehaviour
 		{
 			OpenDoors();
 			sceneLoaded = false;
+		}
+
+		if (player.animator.GetBool("enterLadderFromAbove"))
+		{
+			if (!originalCameraFollowSaved)
+			{
+				originalCameraFollow = vcam.m_Follow;
+				originalCameraFollowSaved = true;
+			}
+			vcam.m_Follow = null;
+			    vcam.transform.position = new Vector3(vcam.transform.position.x,
+				vcam.transform.position.y - 0.015f,
+				vcam.transform.position.z);
+		}
+		
+		else if (player.animator.GetBool("exitLadderFromAbove"))
+		{
+			if (!originalCameraFollowSaved)
+			{
+				originalCameraFollow = vcam.m_Follow;
+				originalCameraFollowSaved = true;
+			}
+			vcam.Follow = null;
+			vcam.transform.position = new Vector3(vcam.transform.position.x,
+				vcam.transform.position.y + 0.015f,
+				vcam.transform.position.z);
+		}
+		else
+		{
+			if (originalCameraFollowSaved)
+			{
+				vcam.m_Follow = originalCameraFollow;
+				originalCameraFollow = null;
+				originalCameraFollowSaved = false;
+			}
 		}
 		
 		if (closing)

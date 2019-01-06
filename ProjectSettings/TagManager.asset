@@ -11,6 +11,7 @@ TagManager:
   - MoveableObject
   - Ladder
   - LadderFloor
+  - LadderGround
   layers:
   - Default
   - TransparentFX

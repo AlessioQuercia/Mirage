@@ -178,7 +178,7 @@ public class PlayerController : MonoBehaviour
     }
 
     // Getting the trigggers that the player is touching
-    public void OnTriggerEnter2D(Collider2D col)
+    public void OnTriggerStay2D(Collider2D col)
     {
         if (col.gameObject.tag == "Ladder")
         {
@@ -256,6 +256,7 @@ public class PlayerController : MonoBehaviour
                 if (!isClimbing)
                 {
                     isInControl = false;
+                    
 
                     if (downRaycastHit.collider != null && downRaycastHit.collider.gameObject.tag == "LadderFloor")
                     {
@@ -277,17 +278,28 @@ public class PlayerController : MonoBehaviour
                     if (downRaycastHit.collider != null && downRaycastHit.collider.gameObject.tag == "Ground")
                     {
                         // The player is leaving the ladder at the bottom
-                        rb2d.gravityScale = 1;
+                        rb2d.gravityScale = 1.25f;
                         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
                         isClimbing = false;
                         isBusy = false;
                         animator.SetBool("climbing", false);
+                        animator.SetBool("exitLadderFromBelow", true);
                     }
                     else
                     {
-                        // The player is leaving the ladder from above
-                        isInControl = false;
-                        StartCoroutine(StopClimbingOnTopOfLadder(upRaycastHit.collider));
+                        if (verticalMove > 0)
+                        {
+                            // The player is leaving the ladder from above
+                            isInControl = false;
+                            rb2d.velocity = new Vector2(0, 0);
+                            StartCoroutine(StopClimbingOnTopOfLadder(upRaycastHit.collider));
+                        }
+                        else
+                        {
+                            rb2d.velocity = new Vector2(0, verticalMove);
+                            //Set the vertical animation
+                            animator.SetFloat("vSpeed", rb2d.velocity.y);
+                        }
                     }
                 }
                 // As long as the player is climbing
@@ -390,20 +402,25 @@ public class PlayerController : MonoBehaviour
 
             // Enter the ladder
             ladderFloorCollider.isTrigger = true;
-            int delay = 40;
-            while (delay != 0)
+//            int delay = 40;
+//            while (delay != 0)
+//            {
+//                delay -= 1;
+////                rb2d.velocity = new Vector2(0, -climbingSpeed);
+//                //Set the entering ladder animation
+//                yield return null;
+//            }
+            while (animator.GetBool("enterLadderFromAbove"))
             {
-                delay -= 1;
-                rb2d.velocity = new Vector2(0, -climbingSpeed);
-                //Set the entering ladder animation
+                isInControl = false;
                 yield return null;
             }
 
-            // End the animation
-            animator.SetBool("enterLadderFromAbove", false);
         }
         else
         {
+            animator.SetBool("exitLadderFromBelow", false);
+            animator.SetBool("enterLadderFromBelow", true);
             // The player enters the ladder from the bottom
             int delay = 10;
             while (delay != 0)
@@ -414,6 +431,7 @@ public class PlayerController : MonoBehaviour
                 animator.SetFloat("vSpeed", rb2d.velocity.y);
                 yield return null;
             }
+            animator.SetBool("enterLadderFromBelow", false);
         }
         isInControl = true;
     }
@@ -425,22 +443,25 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("climbing", false);
         animator.SetBool("exitLadderFromAbove", true);
 
-        // Moving out of the ladder
-        int delay = 40;
-        while (delay != 0)
+//        // Moving out of the ladder
+//        int delay = 1000;
+//        while (delay != 0)
+//        {
+//            delay -= 1;
+////            rb2d.velocity = new Vector2(0, climbingSpeed);
+//            //Set the vertical animation
+//            yield return null;
+//        }
+
+        while (animator.GetBool("exitLadderFromAbove"))
         {
-            delay -= 1;
-            rb2d.velocity = new Vector2(0, climbingSpeed);
-            //Set the vertical animation
+            isInControl = false;
             yield return null;
         }
-
-        // End the animation
-        animator.SetBool("exitLadderFromAbove", false);
-
+            
         // Reestablish gravity and colliders
         ladderFloorCollider.isTrigger = false;
-        rb2d.gravityScale = 1;
+        rb2d.gravityScale = 1.25f;
         rb2d.constraints = RigidbodyConstraints2D.FreezeRotation;
         isClimbing = false;
         isBusy = false;
@@ -460,4 +481,29 @@ public class PlayerController : MonoBehaviour
         Gizmos.DrawLine(centrePointOfPlayer, centrePointOfPlayer + Vector3.up * upRaycastDistance);
         Gizmos.DrawLine(downRaycastsInitialPosition, downRaycastsInitialPosition + Vector3.down * downRaycastDistance);
     }
+
+    
+    public void AlertObservers(string message)
+    {
+        if (message.Equals("ExitLadderFromAboveAnimationEnded"))
+        {
+            transform.position = new Vector3(transform.position.x,
+                transform.position.y + 1.35f,
+                transform.position.z);
+            
+            // End the animation
+            animator.SetBool("exitLadderFromAbove", false);
+        }
+        
+        if (message.Equals("EnterLadderFromAboveAnimationEnded"))
+        {
+            transform.position = new Vector3(transform.position.x,
+                transform.position.y - 1.2f,
+                transform.position.z);
+            
+            // End the animation
+            animator.SetBool("enterLadderFromAbove", false);
+        }
+    }
+    
 }
