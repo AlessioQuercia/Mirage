@@ -147,10 +147,6 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
         verticalMove = Input.GetAxisRaw("Vertical") * climbingSpeed;
 
-        // Debugs to be removed
-        Debug.Log("Front raycast : " + frontRaycastHit.collider);
-        Debug.Log("Up raycast : " + upRaycastHit.collider);
-        Debug.Log("Down raycast : " + downRaycastHit.collider);
     }
 
     // To stop the jumping animation
