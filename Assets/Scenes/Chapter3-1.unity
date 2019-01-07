@@ -304,7 +304,7 @@ Transform:
   - {fileID: 2010166782}
   - {fileID: 1255221925}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &236077833
 GameObject:
@@ -826,7 +826,7 @@ RectTransform:
   m_Children:
   - {fileID: 899829195}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -1257,7 +1257,7 @@ Transform:
   - {fileID: 1694590663}
   - {fileID: 1341365799}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &615012049
 MonoBehaviour:
@@ -3097,7 +3097,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1022340135
 GameObject:
@@ -3268,6 +3268,7 @@ GameObject:
   - component: {fileID: 1073456800}
   - component: {fileID: 1073456801}
   - component: {fileID: 1073456802}
+  - component: {fileID: 1073456803}
   m_Layer: 0
   m_Name: CM vcam1
   m_TagString: Untagged
@@ -3392,6 +3393,23 @@ MonoBehaviour:
   moveSpeed: 0.05
   delay: 0.5
   trigger: {fileID: 634737035}
+--- !u!114 &1073456803
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1073456796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93ef2acc9e7cf8c4b992e1f4abedb483, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  newOrthographicSize: 4
+  newPosition: {x: 0.5, y: 0.5}
+  zoomSpeed: 2.5
+  moveSpeed: 0
+  delay: 0.5
+  trigger: {fileID: 1453952444}
 --- !u!1 &1075065814
 GameObject:
   m_ObjectHideFlags: 0
@@ -4098,7 +4116,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4792394129248536, guid: f6e599059ff691243bc5f2e4b9d686bf, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114099109086809928, guid: f6e599059ff691243bc5f2e4b9d686bf,
         type: 2}
@@ -4514,7 +4532,7 @@ Transform:
   - {fileID: 1903378788}
   - {fileID: 1777531607}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1270649720
 BoxCollider2D:
@@ -5080,6 +5098,60 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8972d54d44fc78c4a8a407c4409341bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1453952443
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1453952445}
+  - component: {fileID: 1453952444}
+  m_Layer: 0
+  m_Name: CameraTrigger2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!61 &1453952444
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453952443}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.2579434, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 12.693432, y: 1}
+  m_EdgeRadius: 0
+--- !u!4 &1453952445
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1453952443}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.47, y: 2.41, z: -10}
+  m_LocalScale: {x: 1.3875, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1468688422
 GameObject:
   m_ObjectHideFlags: 0
@@ -5986,7 +6058,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4255481060809948, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
@@ -6338,7 +6410,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4843381169558356, guid: 8aac0021f56a45446826a386882fd2df, type: 2}
       propertyPath: m_RootOrder
-      value: 7
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8aac0021f56a45446826a386882fd2df, type: 2}
