@@ -27,6 +27,7 @@ public class FireTriggerScript : MonoBehaviour {
         {
             coroutine = FadeToBlack();
             StartCoroutine(coroutine);
+//            SoundManager.instance.musicSource.clip = Resources.Load<AudioClip>("Sounds/DangerousMusic");
         }
     }
 
