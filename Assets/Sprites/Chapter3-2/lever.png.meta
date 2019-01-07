@@ -3,6 +3,7 @@ guid: c447f82ac2861204ea26bc5dcc4e1da0
 TextureImporter:
   fileIDToRecycleName:
     21300000: lever_0
+    21300002: lever_1
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -121,18 +122,18 @@ TextureImporter:
       name: lever_0
       rect:
         serializedVersion: 2
-        x: 3046
-        y: 35
-        width: 97
-        height: 113
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+        x: 3018
+        y: 34
+        width: 129
+        height: 114
+      alignment: 9
+      pivot: {x: 0.5, y: 0.33}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7bcc42009b39ba642b18a8ce58b4ff92
+      spriteID: 07a70ce2769ec32449a06fbd54c0e2fc
       vertices: []
       indices: 
       edges: []

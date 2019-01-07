@@ -9,12 +9,24 @@ EditorBuildSettings:
     path: Assets/Scenes/Title.unity
     guid: cb856bdb1ca4dd8468bd4c8326310739
   - enabled: 1
+    path: Assets/Scenes/PauseMenu.unity
+    guid: 46cb689d6df638841bb15205783670fa
+  - enabled: 1
     path: Assets/Scenes/Menu.unity
     guid: 1a9bce8ea5e99844187e3770f382d95d
   - enabled: 1
-    path: Assets/Scenes/Chapter3.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
+    path: Assets/Scenes/Tutorial.unity
+    guid: 726706a1785f89d4a9e5de7c8bd4978d
+  - enabled: 1
+    path: Assets/Scenes/SampleScene.unity
+    guid: 234676d5932d1d244af923979a7891b3
   - enabled: 1
     path: Assets/Scenes/Chapter3-2.unity
     guid: 69cd3e53116765c408805c28e0d05ee9
+  - enabled: 1
+    path: Assets/Scenes/Chapter3-4.unity
+    guid: c2bb95cb8d55c7a47ae3c1f4be912e62
+  - enabled: 1
+    path: Assets/Scenes/CityLevel.unity
+    guid: b6e7d8949ea58a44c9e7fc14bbf490b4
   m_configObjects: {}

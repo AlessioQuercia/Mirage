@@ -9,18 +9,34 @@ public class ChapterSelector : MonoBehaviour {
     public Sprite[] imageChapters;
     public Sprite[] textChapters;
     int indice;
-    // Use this for initialization
+    bool loadScene;
+    public GameObject continueSelector;
+
+
     void Start ()
     {
-        indice = 0;
+        indice = 2;
         image.GetComponent<SpriteRenderer>().sprite = imageChapters[indice];
         title.GetComponent<SpriteRenderer>().sprite = textChapters[indice];
+
+        loadScene = false;
+        continueSelector.SetActive(loadScene);
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+
+
+    void Update ()
     {
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if(indice!= 2)
+        {
+            image.GetComponent<SpriteRenderer>().color = new Color(102.0f / 255.0f, 102.0f / 255.0f, 102.0f / 255.0f);
+        }
+        else
+        {
+            image.GetComponent<SpriteRenderer>().color = new Color(255.0f / 255.0f, 255.0f / 255.0f, 255.0f / 255.0f);
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.A))
         {
             if(indice != 0)
             {
@@ -29,7 +45,7 @@ public class ChapterSelector : MonoBehaviour {
                 title.GetComponent<SpriteRenderer>().sprite = textChapters[indice];
             }
         }
-        else if (Input.GetKeyDown(KeyCode.RightArrow))
+        else if (Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.D))
         {
             if (indice != 2)
             {
@@ -40,10 +56,34 @@ public class ChapterSelector : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(indice == 2)
+            if(indice == 2 && !loadScene)
             {
-                SceneManager.LoadScene("Chapter3");
+                SceneManager.LoadScene("Tutorial");
+            }
+            else if (loadScene)
+            {
+                Load();
             }
         }
+        else if(Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.S))
+        {
+            if (loadScene)
+            {
+                loadScene = false;
+            }
+            else
+            {
+                loadScene = true;
+            }
+
+            continueSelector.SetActive(loadScene);
+        }
+    }
+
+
+
+    void Load()
+    {
+        
     }
 }
