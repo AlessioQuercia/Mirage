@@ -14,6 +14,7 @@ public class TutorialControl : MonoBehaviour {
 	void Start () {
         scene2.SetActive(false);
         pos = 0;
+
         anim = jumping.GetComponent<Animator>();
         anim.SetBool("jumping", true);
 	}
@@ -21,6 +22,7 @@ public class TutorialControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
+
         if (anim.GetBool("jumping"))
         {
             StartCoroutine(Wait(true));
@@ -29,7 +31,6 @@ public class TutorialControl : MonoBehaviour {
         {
             StartCoroutine(Wait(false));
         }
-        
 
         if (changePos)
         {
@@ -63,8 +64,6 @@ public class TutorialControl : MonoBehaviour {
             changePos = true;
         }
     }
-
-
 
     IEnumerator Wait(bool on)
     {
