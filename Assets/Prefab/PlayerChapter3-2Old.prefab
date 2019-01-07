@@ -2269,6 +2269,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ff0f6f4bed143e428c657e0f19d492e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CenterPosition: {fileID: 0}
   RaycastRight: {fileID: 0}
   RaycastLeft: {fileID: 0}
   RaycastUp: {fileID: 0}
@@ -2280,15 +2281,19 @@ MonoBehaviour:
   climbSpeed: 3
   climbVelocity: 0
   gravityStore: 0
-  grounded: 0
+  jumping: 0
   onLadder: 0
   onMoveableObject: 0
+  nextToMoveableObject: 0
   onSwitch: 0
-  climb: 0
-  moveObject: 0
-  interact: 0
+  climbing: 0
+  movingObject: 0
+  interacting: 0
+  dragging: 0
   flippedRight: 0
-  jumping: 0
+  jumped: 0
+  isDead: 0
+  disabledMovements: 0
 --- !u!114 &114779089158195930
 MonoBehaviour:
   m_ObjectHideFlags: 1
