@@ -33,7 +33,7 @@ public class GameController : MonoBehaviour
 	private float doorDepth = -5;
 	private float doorHeight = 6.9f;
 	private float leftDoorOpenX = 40f;
-	private float leftDoorClosedX = 20f;
+	private float leftDoorClosedX = 20.1f;
 	private float rightDoorOpenX = 8f;
 	private float rightDoorClosedX = 12.1f;
 
