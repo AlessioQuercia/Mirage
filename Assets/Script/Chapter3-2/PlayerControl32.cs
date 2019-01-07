@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Text;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 public class PlayerControl32 : MonoBehaviour
 {
     //Mirage
-    [Header("Center Position")] 
-    public Transform CenterPosition;
     
     //Ray Casting
     [Header("Raycast Directions")]
@@ -19,7 +14,7 @@ public class PlayerControl32 : MonoBehaviour
     public Transform RaycastLeft;
     public Transform RaycastUp;
     public Transform RaycastDown;
-
+    
     //Parameters
     [Header("Parameters")]   
     public float speed = 10f;
@@ -30,18 +25,16 @@ public class PlayerControl32 : MonoBehaviour
     public float climbVelocity;
     public float gravityStore;
 
-    [FormerlySerializedAs("grounded")] public bool jumping;
+    public bool grounded;
     public bool onLadder;
     public bool onMoveableObject;
-    public bool nextToMoveableObject;
     public bool onSwitch;
 
-    bool jump;
-    bool run;
-    public bool climbing;
-    public bool movingObject;
-    public bool interacting;
-    public bool dragging;
+    bool jump = false;
+    bool run = false;
+    public bool climb = false;
+    public bool moveObject = false;
+    public bool interact = false;
 
     private BoxCollider2D floorCollider;
     private Rigidbody2D hayCart;
@@ -50,18 +43,10 @@ public class PlayerControl32 : MonoBehaviour
     Animator anim;
 
     public bool flippedRight;
-    private float flipDegree;
-    private float flipDelta = 0.3f;
 
-    public bool jumped;
+    public bool jumping;
     private long jumpReload;
 
-    public bool isDead;
-    private bool done;
-    private bool done1;
-
-    public bool disabledMovements;
-    
     //	public Rigidbody2D movObjRb2d;
 
     // Use this for initialization
@@ -72,180 +57,137 @@ public class PlayerControl32 : MonoBehaviour
 
         floorCollider = GameObject.Find("Floor").GetComponent<BoxCollider2D>();
 
-        hayCart = GameObject.Find("Rock").GetComponent<Rigidbody2D>();
+        hayCart = GameObject.Find("HayCart").GetComponent<Rigidbody2D>();
 
         gravityStore = rb2d.gravityScale;
 
-        jumping = false;
+        grounded = true;
         flippedRight = true;
-        flipDegree = 1;
-
-        isDead = false;
-        
-        GameController.instance.OpenDoors();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (!disabledMovements)
+        anim.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
+
+        anim.SetBool("grounded", grounded);
+//        anim.SetBool("running", run);
+
+        if (climb)
         {
-            if (transform.position.x >= 18 && !done)
+            rb2d.gravityScale = 0f;
+            climbVelocity = climbSpeed * Input.GetAxisRaw("Vertical");
+
+            rb2d.velocity = new Vector2(0, climbVelocity);
+
+            if (!onLadder || Input.GetKeyDown(KeyCode.E))
             {
-                GameController.instance.LoadScene(3);
-                done = true;
+                climb = false;
+                hayCart.bodyType = RigidbodyType2D.Dynamic;
+                floorCollider.enabled = true;
+            }
+        }
+        else
+        {
+            rb2d.gravityScale = gravityStore;
+            
+            if (jumping)
+                jumpReload++;
+
+            if (jumpReload >= 60)
+            {
+                jumping = false;
+                jumpReload = 0;
             }
 
-            if (isDead && !done)
+            if (!jumping && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) ||
+                 Input.GetKeyDown(KeyCode.W)) && grounded && !moveObject)
             {
-                gameObject.SetActive(false);
-                GameController.instance.GameOver();
-                done = true;
+                jump = true;
             }
 
-            anim.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
-
-            anim.SetBool("jumping", jumping);
-
-            if (climbing)
+            if (!moveObject && Input.GetKeyDown(KeyCode.LeftShift))// && !onWall)
             {
-                rb2d.gravityScale = 0f;
-                climbVelocity = climbSpeed * Input.GetAxisRaw("Vertical");
+                run = true;
+            }
+            else if (Input.GetKeyUp(KeyCode.LeftShift))
+            {
+                run = false;
+            }
 
-                rb2d.velocity = new Vector2(0, climbVelocity);
+            if (onLadder && !moveObject && !onMoveableObject && Input.GetKeyDown(KeyCode.E))
+            {
+                climb = true;
+                hayCart.bodyType = RigidbodyType2D.Static;
+                floorCollider.enabled = false;
+            }
 
-                if (!onLadder || Input.GetKeyDown(KeyCode.E))
-                {
-                    climbing = false;
-                    hayCart.bodyType = RigidbodyType2D.Dynamic;
-                    floorCollider.enabled = true;
-                }
+            if (rb2d.transform.position.y < floorCollider.transform.position.y)
+                hayCart.bodyType = RigidbodyType2D.Static;
+
+            if (run)
+            {
+                maxSpeed = 4;
+            }
+            else if (moveObject)
+            {
+                maxSpeed = 1f;
             }
             else
             {
-                rb2d.gravityScale = gravityStore;
-
-                if (jumped)
-                    jumpReload++;
-
-                if (jumpReload >= 60)
-                {
-                    jumped = false;
-                    jumpReload = 0;
-                }
-
-                if (!jumped && (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space) ||
-                                Input.GetKeyDown(KeyCode.W)) && !jumping && !movingObject)
-                {
-                    jump = true;
-                }
-
-                if (!nextToMoveableObject && !movingObject && Input.GetKeyDown(KeyCode.LeftShift)) // && !onWall)
-                {
-                    run = true;
-                }
-                else if (Input.GetKeyUp(KeyCode.LeftShift))
-                {
-                    run = false;
-                }
-
-                if (onLadder && !movingObject && !onMoveableObject && Input.GetKeyDown(KeyCode.E))
-                {
-                    climbing = true;
-                    hayCart.bodyType = RigidbodyType2D.Static;
-                    floorCollider.enabled = false;
-                }
-
-                if (rb2d.transform.position.y < floorCollider.transform.position.y)
-                    hayCart.bodyType = RigidbodyType2D.Static;
-
-                if (run)
-                {
-                    maxSpeed = 4;
-                }
-                else if (movingObject)
-                {
-                    maxSpeed = 1f;
-                    hayCart.mass = 1;
-                }
-                else
-                {
-                    maxSpeed = 2f;
-                    hayCart.mass = 100;
-                }
-
+                maxSpeed = 2f;
             }
+
         }
     }
 
     private void FixedUpdate()
     {
-        if (!disabledMovements)
+        float h = Input.GetAxis("Horizontal");
+        
+        if (!climb)
         {
-            float h = Input.GetAxis("Horizontal");
+            rb2d.AddForce(Vector2.right * speed * h);
 
-            if (!climbing)
-            {
-                rb2d.AddForce(Vector2.right * speed * h);
-
-                float limitedSpeed = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
-                rb2d.velocity = new Vector2(limitedSpeed, rb2d.velocity.y);
-
-                if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && !jumping)
-                    rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-            }
-
-            if (h > 0.1f && !movingObject)
-            {
-                if (flipDegree + flipDelta < 1)
-                    flipDegree += flipDelta;
-                else
-                    flipDegree = 1;
-                transform.localScale = new Vector3(flipDegree, 1f, 1f);
-                flippedRight = true;
-            }
-
-            if (h < -0.1f && !movingObject)
-            {
-                if (flipDegree - flipDelta > -1)
-                    flipDegree -= flipDelta;
-                else
-                    flipDegree = -1;
-                transform.localScale = new Vector3(flipDegree, 1f, 1f);
-                flippedRight = false;
-            }
-
-            if (jump)
-            {
-                rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
-                jumped = true;
-                jump = false;
-                jumping = true;
-            }
-
-            if (movingObject)
-            {
-                if (flippedRight && h < 0 || !flippedRight && h > 0)
-                    dragging = true;
-                else
-                    dragging = false;
-            }
-
-            anim.SetBool("interacting", interacting);
-
-            if (interacting = true)
-                interacting = false;
-
-            anim.SetBool("climbing", climbing);
-
-            anim.SetBool("movingObject", movingObject);
+            float limitedSpeed = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
+            rb2d.velocity = new Vector2(limitedSpeed, rb2d.velocity.y);
             
-            anim.SetBool("dragging", dragging);
-
-            anim.SetBool("jumping", jumping);
-
-            //Set the vertical animation
-            anim.SetFloat("vSpeed", rb2d.velocity.y);
+            if ((Input.GetKeyUp(KeyCode.A) || Input.GetKeyUp(KeyCode.D)) && grounded)
+                rb2d.velocity = new Vector2(0, rb2d.velocity.y);
         }
+
+        if (h > 0.1f && !moveObject)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+            flippedRight = true;
+        }
+
+        if (h < -0.1f && !moveObject)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+            flippedRight = false;
+        }
+
+        if (jump)
+        {
+            rb2d.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            jumping = true;
+            jump = false;
+            anim.SetBool("grounded", false);
+        }
+
+        anim.SetBool("interact", interact);
+
+        if (interact = true)
+            interact = false;
+
+        anim.SetBool("climb", climb);
+
+        anim.SetBool("moveObject", moveObject);
+
+        anim.SetBool("grounded", grounded);
+
+        //Set the vertical animation
+        anim.SetFloat("vSpeed", rb2d.velocity.y);
     }
 }
