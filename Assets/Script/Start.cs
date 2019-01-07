@@ -5,12 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class Start : MonoBehaviour {
 
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("PauseMenu");
         }
 	}
 }

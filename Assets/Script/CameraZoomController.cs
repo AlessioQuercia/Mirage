@@ -37,7 +37,7 @@ public class CameraZoomController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (trigger != null & trigger.isTrigger)
+        if (trigger != null && trigger.isTrigger)
         {
             if (trigger.IsTouching(player) && !hasTriggered)
             {

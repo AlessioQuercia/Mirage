@@ -44,7 +44,7 @@ public class PauseController : MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        //SceneManager.LoadScene("ChapterSelector");
+        SceneManager.LoadScene("Menu");
     }
 
 
@@ -71,12 +71,12 @@ public class PauseController : MonoBehaviour {
                 }
                 else if (posArrowPause == 3)
                 {
-                    arrowPause.transform.position = posStart4.transform.position;
-                }
-                else if (posArrowPause == 4)
-                {
                     arrowPause.transform.position = posStart5.transform.position;
                 }
+//                else if (posArrowPause == 4)
+//                {
+//                    arrowPause.transform.position = posStart5.transform.position;
+//                }
 
                 movePauseArrow = false;
             }
@@ -183,7 +183,7 @@ public class PauseController : MonoBehaviour {
 
                 if (posArrowPause == -1)
                 {
-                    posArrowPause = 4;
+                    posArrowPause = 3;
                 }
 
                 movePauseArrow = true;
@@ -247,6 +247,11 @@ public class PauseController : MonoBehaviour {
                     backgroundMenu.SetActive(pauseActive);
                     pauseMenu.SetActive(pauseActive);
                 }
+                else if (posArrowPause == 1)
+                {
+                    // Restart Scene
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+                }
                 else if (posArrowPause == 2)
                 {
                     settingsActive = true;
@@ -256,13 +261,25 @@ public class PauseController : MonoBehaviour {
                     posArrowSettings = 0;
                     moveSettingsArrow = true;
                 }
+//                else if (posArrowPause == 3)
+//                {
+//                    pauseActive = false;
+//
+//                    backgroundMenu.SetActive(pauseActive);
+//                    pauseMenu.SetActive(pauseActive);
+//                    
+//                    SceneManager.LoadScene("Tutorial");
+//                }
                 else if (posArrowPause == 3)
                 {
-                    SceneManager.LoadScene("Tutorial");
-                }
-                else if (posArrowPause == 4)
-                {
-                    SceneManager.LoadScene("ChapterSelector");
+                    posArrowPause = 0;
+                    movePauseArrow = true;
+                    pauseActive = false;
+
+                    backgroundMenu.SetActive(pauseActive);
+                    pauseMenu.SetActive(pauseActive);
+                    
+                    SceneManager.LoadScene("Title");
                 }
             }
             else

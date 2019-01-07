@@ -52,6 +52,10 @@ public class GameController : MonoBehaviour
 	public bool opening;
 	public bool closing;
 
+	public int gameOverTime = 100;
+
+	private int gameOverCurrentTime = 0;
+
 	private int sceneToLoad;
 
 	private bool sceneLoaded;
@@ -79,6 +83,7 @@ public class GameController : MonoBehaviour
 		{
 			OpenDoors();
 			sceneLoaded = false;
+			Save();
 		}
 
 		if (player.animator.GetBool("enterLadderFromAbove"))
@@ -154,8 +159,10 @@ public class GameController : MonoBehaviour
 				if (gameOver)
 				{
 					gameOverText.SetActive(true);
-					if (Input.GetKeyDown(KeyCode.Space))
+					gameOverCurrentTime++;
+					if (gameOverCurrentTime >= gameOverTime)
 					{
+						gameOverCurrentTime = 0;
 						gameOver = false;
 						closing = false;
 						ReloadScene();
@@ -309,12 +316,12 @@ public class GameController : MonoBehaviour
 		if (rightDoor == null)
 			rightDoor = Instantiate(Resources.Load("Prefabs/RightStageDoor")) as GameObject;
 		
-		leftDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - leftDoorOpenX,
-            vcam.gameObject.transform.position.y - doorHeight, doorDepth);
-		rightDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x + rightDoorOpenX,
-            vcam.gameObject.transform.position.y - doorHeight, doorDepth);
-		gameOverText.transform.position = new Vector3(vcam.gameObject.transform.position.x - gameOverX,
-            vcam.gameObject.transform.position.y - gameOverY, gameOverZ);
+		leftDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - leftDoorOpenX,
+			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
+		rightDoor.transform.position = new Vector3(Camera.main.gameObject.transform.position.x + rightDoorOpenX,
+			Camera.main.gameObject.transform.position.y - doorHeight, doorDepth);
+		gameOverText.transform.position = new Vector3(Camera.main.gameObject.transform.position.x - gameOverX, 
+			Camera.main.gameObject.transform.position.y - gameOverY, gameOverZ);
 			
 		leftDoor.SetActive(true);
 		rightDoor.SetActive(true);

@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
 
         // Getting the pressed keys
-        if (Input.GetButtonDown("Jump"))
+        if (isInControl && Input.GetButtonDown("Jump"))
         {
             jump = true;
 
@@ -147,10 +147,6 @@ public class PlayerController : MonoBehaviour
         horizontalMove = Input.GetAxisRaw("Horizontal") * movementSpeed;
         verticalMove = Input.GetAxisRaw("Vertical") * climbingSpeed;
 
-        // Debugs to be removed
-        Debug.Log("Front raycast : " + frontRaycastHit.collider);
-        Debug.Log("Up raycast : " + upRaycastHit.collider);
-        Debug.Log("Down raycast : " + downRaycastHit.collider);
     }
 
     // To stop the jumping animation
