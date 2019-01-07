@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
 
 public class MoveableZone : MonoBehaviour {
     private PlayerControl32 player;
@@ -13,10 +12,6 @@ public class MoveableZone : MonoBehaviour {
     private bool canRelease;
 
     private float moveableObjectPosition;
-    
-    private Collider2D playerRaycastLeftCollider;
-    private Collider2D playerRaycastRightCollider;
-    private Collider2D playerRaycastDownCollider;
 
     // Use this for initialization
     void Start()
@@ -24,23 +19,13 @@ public class MoveableZone : MonoBehaviour {
         player = FindObjectOfType<PlayerControl32>();
 
         rb2d = this.gameObject.GetComponent<Rigidbody2D>();
-        
-        playerRaycastLeftCollider = player.RaycastLeft.GetComponent<Collider2D>();
-        playerRaycastRightCollider = player.RaycastRight.GetComponent<Collider2D>();
-        playerRaycastDownCollider = player.RaycastDown.GetComponent<Collider2D>();
     }
 
     void OnCollisionStay2D(Collision2D col)
     {
         if (col.gameObject.tag == "Player")
         {
-//            player.isDead = true;
             player.onMoveableObject = true;
-            
-            if (!playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()))
-            {
-                player.nextToMoveableObject = true;
-            }
         }
     }
 
@@ -49,38 +34,36 @@ public class MoveableZone : MonoBehaviour {
         if (col.gameObject.tag == "Player")
         {
             player.onMoveableObject = false;
-            player.nextToMoveableObject = false;
         }
     }
 	
     // Update is called once per frame
     void Update () 
     {
-        if (player.onMoveableObject && !playerRaycastDownCollider.IsTouching(GetComponent<Collider2D>()) 
-                                    && Input.GetKeyDown(KeyCode.E))
+        if (player.onMoveableObject && Input.GetKeyDown(KeyCode.E))
         {
-            player.movingObject = true;
+            player.moveObject = true;
             if (player.flippedRight)
-                moveableObjectPosition = 0.89f;
+                moveableObjectPosition = 1.239f;
             else
-                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.033f;
+                moveableObjectPosition = -rb2d.GetComponent<Collider2D>().bounds.size.x + 0.355f;
         }    
 		
-        if (player.movingObject && Input.GetKeyUp(KeyCode.E))
+        if (player.moveObject && Input.GetKeyUp(KeyCode.E))
         {
             canRelease = true;
         }
 		
-        if (player.movingObject && canRelease && Input.GetKeyDown(KeyCode.E))
+        if (player.moveObject && canRelease && Input.GetKeyDown(KeyCode.E))
         {
-            player.movingObject = false;
+            player.moveObject = false;
             canRelease = false;
         }
     }
 
     private void FixedUpdate()
     {
-        if (player.movingObject)
+        if (player.moveObject)
         {
             float h = Input.GetAxis("Horizontal");
 //            player.onMoveableObject = true;
