@@ -739,7 +739,7 @@ Transform:
   m_GameObject: {fileID: 491009827}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.01, z: 0}
-  m_LocalScale: {x: 0.70098937, y: 0.94208544, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.94208544, z: 1}
   m_Children:
   - {fileID: 1889611808}
   - {fileID: 690264955}
@@ -1257,7 +1257,7 @@ Transform:
   m_GameObject: {fileID: 1039689798}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.026, y: 0.052, z: 0}
-  m_LocalScale: {x: 0.701338, y: 0.936988, z: 1}
+  m_LocalScale: {x: 0.95, y: 0.9420854, z: 1}
   m_Children:
   - {fileID: 120465665}
   - {fileID: 1510690784}
@@ -1640,7 +1640,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1282757815}
-  - component: {fileID: 1282757814}
   - component: {fileID: 1282757816}
   m_Layer: 0
   m_Name: TutorialControl
@@ -1649,17 +1648,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1282757814
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1282757813}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5b72f03e2c1fce64f992289881cb9fc1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!4 &1282757815
 Transform:
   m_ObjectHideFlags: 0
@@ -1732,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 0.1}
-  m_Length: 0.31420612
+  m_Length: 0.31420624
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 38530385}
   m_AttachedIK: {fileID: 0}
@@ -2035,7 +2023,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Color: {r: 1, g: 1, b: 1, a: 0.1}
-  m_Length: 0.36689112
+  m_Length: 0.3668911
   m_Child: {fileID: 0}
   m_ChildTransform: {fileID: 1375927540}
   m_AttachedIK: {fileID: 0}

@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
 		{
 			OpenDoors();
 			sceneLoaded = false;
+			Save();
 		}
 
 		if (player.animator.GetBool("enterLadderFromAbove"))
@@ -291,9 +292,9 @@ public class GameController : MonoBehaviour
 			vcam.transform.position.y, vcam.transform.position.z);
 		
 		leftDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - leftDoorClosedX,
-			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+            vcam.gameObject.transform.position.y - doorHeight, doorDepth);
 		rightDoor.transform.position = new Vector3(vcam.gameObject.transform.position.x - rightDoorClosedX,
-			vcam.gameObject.transform.position.y - doorHeight, doorDepth);
+            vcam.gameObject.transform.position.y - doorHeight, doorDepth);
 			
 		gameOverText.SetActive(false);
 		leftDoor.SetActive(true);

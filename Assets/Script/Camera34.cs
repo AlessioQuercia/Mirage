@@ -24,6 +24,6 @@ public class Camera34 : MonoBehaviour
     void Update()
     {
         print(Camera.main.orthographicSize);
-        transform.position = new Vector3(target.position.x, 0, -1);
+        transform.position = new Vector3(target.position.x, 0, 5);
     }
 }

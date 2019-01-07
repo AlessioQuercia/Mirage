@@ -46,7 +46,7 @@ public class TutorialControl : MonoBehaviour {
             }
             else if (pos == 2)
             {
-                SceneManager.LoadScene("SampleScene");
+                SceneManager.LoadScene("Chapter3-1");
             }
         }
 
