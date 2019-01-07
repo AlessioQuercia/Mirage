@@ -4,13 +4,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Start : MonoBehaviour {
+    private void Awake()
+    {
+        DontDestroyOnLoad(gameObject);
+        SceneManager.LoadScene("Menu");
+    }
 
-	
-	// Update is called once per frame
-	void Update () {
+    // Update is called once per frame
+    void Update () {
         if (Input.anyKeyDown)
         {
-            SceneManager.LoadScene("Menu");
+            SceneManager.LoadScene("PauseMenu");
         }
 	}
 }

@@ -44,7 +44,7 @@ public class PauseController : MonoBehaviour {
     private void Awake()
     {
         DontDestroyOnLoad(gameObject);
-        //SceneManager.LoadScene("ChapterSelector");
+        SceneManager.LoadScene("Menu");
     }
 
 

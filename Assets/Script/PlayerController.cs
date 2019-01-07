@@ -97,7 +97,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
 
         // Getting the pressed keys
-        if (Input.GetButtonDown("Jump"))
+        if (isInControl && Input.GetButtonDown("Jump"))
         {
             jump = true;
 
