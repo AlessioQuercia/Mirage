@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PuzzleQuestController : PuzzleController {
-
     public GameObject winCondition, blockingWall;
     [TextArea]
     public string winMessage;

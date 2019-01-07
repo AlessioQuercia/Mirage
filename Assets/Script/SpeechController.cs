@@ -85,7 +85,7 @@ public class SpeechController : MonoBehaviour {
     private GameObject getNearestCharacter()
     {
         TextBubble[] textBubbles = GetComponentsInChildren<TextBubble>();
-        float distance = 100;
+        float distance = 1000;
         GameObject nearestCharacter = null;
         Transform playerTransform, characterTransform;
 
@@ -101,7 +101,6 @@ public class SpeechController : MonoBehaviour {
                 }
             }
         }
-
         return nearestCharacter;
     }
 }
