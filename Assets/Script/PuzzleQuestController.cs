@@ -32,13 +32,14 @@ public class PuzzleQuestController : PuzzleController {
 	void Update () {
         
 
-        if (Input.GetKey(KeyCode.E) && IsActive && !IsBusy && playerCollider.IsTouching(winConditionCollider))
+        if (Input.GetButtonDown("Interact") && IsActive && !IsBusy && playerCollider.IsTouching(winConditionCollider))
         {
             StartCoroutine(toggleActive());
 
             //TODO Show the player he has won
         }
-        if (Input.GetKey(KeyCode.E) && !IsActive && !IsBusy && playerCollider.IsTouching(blockingWallCollider))
+
+        if (!IsActive && !IsBusy && playerCollider.IsTouching(blockingWallCollider))
         {
             StartCoroutine(toggleWall());
             
@@ -56,5 +57,15 @@ public class PuzzleQuestController : PuzzleController {
     {
         yield return new WaitForSeconds(1);
         blockingWallCollider.isTrigger = true;
+        StartCoroutine(fadeOut(blockingWall.GetComponent<SpriteRenderer>()));
+    }
+
+    private IEnumerator fadeOut(SpriteRenderer sprite)
+    {
+        while(sprite.color.a > 0)
+        {
+            sprite.color = new Color(sprite.color.r, sprite.color.g, sprite.color.b, sprite.color.a - Time.deltaTime);
+            yield return null;
+        }
     }
 }

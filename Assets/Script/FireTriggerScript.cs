@@ -32,6 +32,7 @@ public class FireTriggerScript : MonoBehaviour {
 
     public IEnumerator FadeToBlack()
     {
+        player.GetComponent<PlayerController>().isInControl = false;
         Color color = fadeToBlack.GetComponent<SpriteRenderer>().color;
 
         while (color.a < 1)
@@ -45,5 +46,6 @@ public class FireTriggerScript : MonoBehaviour {
             fadeToBlack.GetComponent<SpriteRenderer>().color = new Color(color.r, color.b, color.b, color.a -= fadeToBlackSpeed * Time.deltaTime);
             yield return null;
         }
+        player.GetComponent<PlayerController>().isInControl = true;
     }
 }
