@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -84,6 +86,13 @@ public class ChapterSelector : MonoBehaviour {
 
     void Load()
     {
-        
+        if (File.Exists(Application.dataPath + "/saves/autosave"))
+        {
+            String toLoad = File.ReadAllText(Application.dataPath + "/saves/autosave");
+
+            int sceneToLoad = Int32.Parse(toLoad.Split('=')[1].Replace(" ", ""));
+
+            SceneManager.LoadScene(sceneToLoad);
+        }
     }
 }

@@ -83,6 +83,7 @@ public class GameController : MonoBehaviour
 		{
 			OpenDoors();
 			sceneLoaded = false;
+			Save();
 		}
 
 		if (player.animator.GetBool("enterLadderFromAbove"))
