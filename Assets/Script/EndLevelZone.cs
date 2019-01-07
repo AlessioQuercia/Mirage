@@ -22,10 +22,10 @@ public class EndLevelZone : MonoBehaviour {
 			// If you want to test it, reload the same scene with the following line
 //			GameController.instance.LoadScene(SceneManager.GetActiveScene().buildIndex);
 			
-			if (SceneManager.GetActiveScene().name == "Chapter3-4")
-				GameController.instance.LoadScene("Menu");
-			else
-				GameController.instance.LoadNextScene();
+			//if (SceneManager.GetActiveScene().name == "Chapter3-4")
+			//	GameController.instance.LoadScene("Menu");
+			//else
+			GameController.instance.LoadNextScene();
 		}
 	}
 }

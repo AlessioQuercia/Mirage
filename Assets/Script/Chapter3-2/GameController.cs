@@ -268,7 +268,12 @@ public class GameController : MonoBehaviour
 	{
 		CloseDoors();
 		load = true;
-		sceneToLoad = SceneManager.GetActiveScene().buildIndex + 1;
+		
+		if (SceneManager.GetActiveScene().name == "Chapter3-4")
+			sceneToLoad = 0;
+		else 
+			sceneToLoad = SceneManager.GetActiveScene().buildIndex + 1;
+			
 	}
 
 	public void OpenDoors()
