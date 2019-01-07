@@ -101,7 +101,7 @@ public class PlayerController : MonoBehaviour
         {
             jump = true;
 
-            if (!isBusy)
+            if (!isBusy || isInControl)
             {
                 animator.SetBool("jumping", true);
             }
