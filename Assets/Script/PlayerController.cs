@@ -134,6 +134,19 @@ public class PlayerController : MonoBehaviour
         {
             run = false;
         }
+        
+        if(Input.GetKeyDown((KeyCode.Escape)))
+        {
+            if (!isInControl)
+                isInControl = true;
+            else
+            {
+                isInControl = false;
+                rb2d.velocity = new Vector3(0,0,0);
+            }
+
+            
+        }
 
         if (run && !isDragging)
         {

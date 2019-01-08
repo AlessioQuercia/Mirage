@@ -531,6 +531,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &306558116
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 306558117}
+  - component: {fileID: 306558118}
+  m_Layer: 8
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &306558117
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306558116}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -13.76, y: -3.5729766, z: -5}
+  m_LocalScale: {x: 1.6, y: 1.6, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!61 &306558118
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 306558116}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.11380446, y: 1.7142651}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7723911, y: 3.625936}
+  m_EdgeRadius: 0
 --- !u!1 &328789343
 GameObject:
   m_ObjectHideFlags: 0
@@ -4468,7 +4522,7 @@ GameObject:
   - component: {fileID: 1270649720}
   m_Layer: 8
   m_Name: Background
-  m_TagString: Untagged
+  m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6030,7 +6084,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4255481060809948, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -5.5
+      value: -0.6
       objectReference: {fileID: 0}
     - target: {fileID: 4255481060809948, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
       propertyPath: m_LocalPosition.y
@@ -6059,6 +6113,16 @@ Prefab:
     - target: {fileID: 4255481060809948, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
       propertyPath: m_RootOrder
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 61353620852470880, guid: 2e645a852ddf8ee4e9c9e12580ee2605,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: 2.208331
+      objectReference: {fileID: 0}
+    - target: {fileID: 61353620852470880, guid: 2e645a852ddf8ee4e9c9e12580ee2605,
+        type: 2}
+      propertyPath: m_Size.y
+      value: 2.8625736
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2e645a852ddf8ee4e9c9e12580ee2605, type: 2}
@@ -6505,7 +6569,7 @@ GameObject:
   - component: {fileID: 1903378788}
   - component: {fileID: 1903378787}
   - component: {fileID: 1903378789}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: mountain
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -6629,14 +6693,14 @@ PolygonCollider2D:
       - {x: -2.2939482, y: -2.32853}
       - {x: -2.6167147, y: -2.536023}
       - {x: -2.7780979, y: -2.9510086}
-      - {x: -3.0317001, y: -3.642651}
-      - {x: -3.2853024, y: -4.1729107}
-      - {x: -3.331412, y: -4.4265127}
-      - {x: -3.3544667, y: -4.7953887}
-      - {x: -3.4697406, y: -5.2334294}
-      - {x: -3.6541786, y: -5.948127}
-      - {x: -3.8386166, y: -6.570605}
-      - {x: -4.276657, y: -7.3544664}
+      - {x: -3.0740333, y: -3.8999224}
+      - {x: -2.896881, y: -4.4331436}
+      - {x: -2.812723, y: -4.6426334}
+      - {x: -2.9231167, y: -5.09855}
+      - {x: -2.6545072, y: -6.7901325}
+      - {x: -3.0975747, y: -7.0269966}
+      - {x: -3.7572026, y: -7.2633743}
+      - {x: -4.107907, y: -7.440026}
       - {x: -4.5072045, y: -7.6541786}
       - {x: -4.6685877, y: -7.9308357}
       - {x: -4.6685877, y: -8}

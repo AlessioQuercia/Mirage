@@ -53,8 +53,29 @@ public class PauseController : MonoBehaviour {
     // Update is called once per frame
     void Update ()
     {
-        if(movePauseArrow || moveSettingsArrow)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
+            if (!settingsActive)
+            {
+                if (!pauseActive)
+                {
+                    pauseActive = true;
+                    movePauseArrow = true;
+                }
+                else
+                {
+                    pauseActive = false;
+                }
+
+                backgroundMenu.SetActive(pauseActive);
+                pauseMenu.SetActive(pauseActive);
+            }
+        }
+        
+        if (pauseActive)
+        {
+           if(movePauseArrow || moveSettingsArrow)
+            {
             if (movePauseArrow)
             {
                 if(posArrowPause == 0)
@@ -120,25 +141,8 @@ public class PauseController : MonoBehaviour {
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            if (!settingsActive)
-            {
-                if (!pauseActive)
-                {
-                    pauseActive = true;
-                    movePauseArrow = true;
-                }
-                else
-                {
-                    pauseActive = false;
-                }
-
-                backgroundMenu.SetActive(pauseActive);
-                pauseMenu.SetActive(pauseActive);
-            }
-        }
-        else if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (settingsActive)
             {
@@ -250,6 +254,9 @@ public class PauseController : MonoBehaviour {
                 else if (posArrowPause == 1)
                 {
                     // Restart Scene
+                    pauseActive = false;
+                    backgroundMenu.SetActive(pauseActive);
+                    pauseMenu.SetActive(pauseActive);
                     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
                 }
                 else if (posArrowPause == 2)
@@ -295,6 +302,8 @@ public class PauseController : MonoBehaviour {
                 }
             }
         }
-    }
+    } 
+        }
+        
 }
 
