@@ -751,8 +751,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ef2acc9e7cf8c4b992e1f4abedb483, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newOrthographicSize: 8
-  newPosition: {x: 0, y: 0.5}
+  newOrthographicSize: 7.9
+  newPosition: {x: 0, y: 0}
   zoomSpeed: 5
   moveSpeed: 0
   delay: 1
@@ -2290,6 +2290,7 @@ GameObject:
   - component: {fileID: 129125004}
   - component: {fileID: 129125006}
   - component: {fileID: 129125005}
+  - component: {fileID: 129125007}
   m_Layer: 0
   m_Name: colum1
   m_TagString: Untagged
@@ -2392,6 +2393,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &129125007
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 129125002}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.028310776, y: -0.10504532}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.77, y: 1.19}
+    newSize: {x: 0.77, y: 1.19}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.34129047, y: 0.9799094}
+  m_EdgeRadius: 0
 --- !u!1 &158696769
 GameObject:
   m_ObjectHideFlags: 0
@@ -7830,6 +7856,7 @@ GameObject:
   - component: {fileID: 663898452}
   - component: {fileID: 663898454}
   - component: {fileID: 663898453}
+  - component: {fileID: 663898455}
   m_Layer: 0
   m_Name: stone3
   m_TagString: Untagged
@@ -7932,6 +7959,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &663898455
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 663898450}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.03235531, y: 0.016160965}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.94, y: 0.57}
+    newSize: {x: 0.94, y: 0.57}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7620454, y: 0.42455268}
+  m_EdgeRadius: 0
 --- !u!1 &674207225
 GameObject:
   m_ObjectHideFlags: 0
@@ -8454,7 +8506,7 @@ MonoBehaviour:
   triggerZone: {fileID: 0}
   fallsAfterTouchingThePlayer: 1
   fallsAfterTriggerZoneActivation: 0
-  delayAfterTouchingThePlayer: 3
+  delayAfterTouchingThePlayer: 2
   delayAfterTriggerZoneActivation: 0
 --- !u!50 &697169810
 Rigidbody2D:
@@ -14276,6 +14328,7 @@ GameObject:
   - component: {fileID: 1056552327}
   - component: {fileID: 1056552329}
   - component: {fileID: 1056552328}
+  - component: {fileID: 1056552330}
   m_Layer: 0
   m_Name: stone2
   m_TagString: Untagged
@@ -14378,6 +14431,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1056552330
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1056552325}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.008088946, y: 0.004040122}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.23, y: 0.57}
+    newSize: {x: 1.23, y: 0.57}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0682232, y: 0.43263292}
+  m_EdgeRadius: 0
 --- !u!1 &1059302441
 GameObject:
   m_ObjectHideFlags: 0
@@ -14936,6 +15014,7 @@ GameObject:
   - component: {fileID: 1070512832}
   - component: {fileID: 1070512834}
   - component: {fileID: 1070512833}
+  - component: {fileID: 1070512835}
   m_Layer: 0
   m_Name: stone1
   m_TagString: Untagged
@@ -15038,6 +15117,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1070512835
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1070512830}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.01213336, y: 0.036361694}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.86, y: 0.7}
+    newSize: {x: 0.86, y: 0.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.7063117, y: 0.51415133}
+  m_EdgeRadius: 0
 --- !u!1 &1072144945
 GameObject:
   m_ObjectHideFlags: 0
@@ -16498,8 +16602,8 @@ PolygonCollider2D:
   m_Points:
     m_Paths:
     - - {x: -52.96, y: 8}
-      - {x: -52.96, y: -8}
-      - {x: 265.66, y: -8}
+      - {x: -52.96, y: -7.95}
+      - {x: 265.66, y: -7.95}
       - {x: 265.66, y: 8}
 --- !u!1 &1202118347
 GameObject:
@@ -18047,6 +18151,7 @@ GameObject:
   - component: {fileID: 1298338516}
   - component: {fileID: 1298338518}
   - component: {fileID: 1298338517}
+  - component: {fileID: 1298338519}
   m_Layer: 0
   m_Name: colum2
   m_TagString: Untagged
@@ -18149,6 +18254,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1298338519
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1298338514}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000011920929, y: -0.06851697}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.94, y: 1.2}
+    newSize: {x: 0.94, y: 1.2}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.39129066, y: 1.0629661}
+  m_EdgeRadius: 0
 --- !u!1 &1303284282
 GameObject:
   m_ObjectHideFlags: 0
@@ -25947,7 +26077,7 @@ MonoBehaviour:
   fallsAfterTouchingThePlayer: 0
   fallsAfterTriggerZoneActivation: 1
   delayAfterTouchingThePlayer: 0
-  delayAfterTriggerZoneActivation: 4
+  delayAfterTriggerZoneActivation: 3.5
 --- !u!50 &1937658821
 Rigidbody2D:
   serializedVersion: 4
@@ -26173,6 +26303,7 @@ GameObject:
   - component: {fileID: 1947505254}
   - component: {fileID: 1947505256}
   - component: {fileID: 1947505255}
+  - component: {fileID: 1947505257}
   m_Layer: 0
   m_Name: stone4
   m_TagString: Untagged
@@ -26275,6 +26406,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &1947505257
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1947505252}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.020222068, y: -0.0040402412}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.23, y: 0.57}
+    newSize: {x: 1.23, y: 0.57}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.0601342, y: 0.43263268}
+  m_EdgeRadius: 0
 --- !u!1 &1951877261
 GameObject:
   m_ObjectHideFlags: 0
@@ -27546,6 +27702,7 @@ GameObject:
   - component: {fileID: 2022579274}
   - component: {fileID: 2022579276}
   - component: {fileID: 2022579275}
+  - component: {fileID: 2022579277}
   m_Layer: 0
   m_Name: stone2 (1)
   m_TagString: Untagged
@@ -27648,6 +27805,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &2022579277
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2022579272}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.00017791986, y: 0.00000023841858}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 1.23, y: 0.57}
+    newSize: {x: 1.23, y: 0.57}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.9562868, y: 0.4603727}
+  m_EdgeRadius: 0
 --- !u!1 &2023552976
 GameObject:
   m_ObjectHideFlags: 0
@@ -28487,6 +28669,7 @@ GameObject:
   - component: {fileID: 2087759092}
   - component: {fileID: 2087759094}
   - component: {fileID: 2087759093}
+  - component: {fileID: 2087759095}
   m_Layer: 0
   m_Name: stone1 (1)
   m_TagString: Untagged
@@ -28589,6 +28772,31 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!61 &2087759095
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2087759090}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.013619363, y: 0.03304541}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 0.86, y: 0.7}
+    newSize: {x: 0.86, y: 0.7}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6685418, y: 0.43720865}
+  m_EdgeRadius: 0
 --- !u!1 &2102886440
 GameObject:
   m_ObjectHideFlags: 0
