@@ -2313,6 +2313,8 @@ MonoBehaviour:
   onSwitch: 0
   interact: 0
   checkInventory: 0
+  walkingSpeed: 25
+  runningSpeed: 50
 --- !u!114 &114812241130878512
 MonoBehaviour:
   m_ObjectHideFlags: 1
