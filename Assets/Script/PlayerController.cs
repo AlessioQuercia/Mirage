@@ -43,13 +43,15 @@ public class PlayerController : MonoBehaviour
     bool run = false;
     bool jump = false;
     bool crouch = false;
-    float walkingSpeed = 20f;
-    float runningSpeed = 40F;
+    public float walkingSpeed = 25f;
+    public float runningSpeed = 50f;
 
     // Inner interaction variables
     bool isDragging = false;
     Collider2D currentLadderCollider = null;
     bool isBusy = false;
+
+    private bool inPauseMenu = false;
 
     // Other inner variables
 
@@ -97,7 +99,7 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("speed", Mathf.Abs(rb2d.velocity.x));
 
         // Getting the pressed keys
-        if (isInControl && Input.GetButtonDown("Jump"))
+        if (isInControl && !isBusy && Input.GetButtonDown("Jump"))
         {
             jump = true;
 
@@ -135,18 +137,33 @@ public class PlayerController : MonoBehaviour
             run = false;
         }
         
-        if(Input.GetKeyDown((KeyCode.Escape)))
+        if (PauseController.instance != null)
         {
-            if (!isInControl)
-                isInControl = true;
-            else
+            if (PauseController.instance.pauseActive || PauseController.instance.settingsActive)
             {
                 isInControl = false;
-                rb2d.velocity = new Vector3(0,0,0);
+                rb2d.velocity = new Vector3(0, 0, 0);
+                inPauseMenu = true;
             }
 
-            
+            else if (inPauseMenu && !isInControl && PauseController.instance.pauseActive == false &&
+                     PauseController.instance.settingsActive == false)
+            {
+                isInControl = true;
+                inPauseMenu = false;
+            }
         }
+
+//        if(Input.GetKeyDown((KeyCode.Escape)))
+//        {
+//            if (isInControl)
+//            {
+//                isInControl = false;
+//                rb2d.velocity = new Vector3(0,0,0);
+//                inPauseMenu = true;
+//            }
+//        }
+
 
         if (run && !isDragging)
         {
@@ -348,6 +365,9 @@ public class PlayerController : MonoBehaviour
             controller.Move(transform.localScale.x * movementSpeed * Time.fixedDeltaTime, false, false, false);
             yield return null;
         }
+
+        isDragging = true;
+        
         movementSpeed = walkingSpeed;
         HingeJoint2D draggingJoint = (HingeJoint2D)gameObject.AddComponent<HingeJoint2D>();
         draggingJoint.connectedBody = moveableObject.GetComponent<Rigidbody2D>();

@@ -1409,7 +1409,7 @@ GameObject:
   m_Component:
   - component: {fileID: 634737034}
   - component: {fileID: 634737035}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraTrigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1603,7 +1603,7 @@ GameObject:
   - component: {fileID: 712742029}
   - component: {fileID: 712742028}
   - component: {fileID: 712742027}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2702,7 +2702,7 @@ GameObject:
   - component: {fileID: 899829194}
   - component: {fileID: 899829193}
   - component: {fileID: 899829192}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: PoorMan
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4670,7 +4670,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1310634112}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3, y: -1.58, z: 1.2109375}
+  m_LocalPosition: {x: -1.52, y: -0.88, z: 1.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010166782}
@@ -5161,7 +5161,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1453952445}
   - component: {fileID: 1453952444}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: CameraTrigger2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6358,7 +6358,7 @@ GameObject:
   - component: {fileID: 1837252627}
   - component: {fileID: 1837252629}
   - component: {fileID: 1837252628}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: textBubble
   m_TagString: TextBubble
   m_Icon: {fileID: 0}
@@ -7117,7 +7117,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2108276880}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.72, y: -0.81, z: 1.2109375}
+  m_LocalPosition: {x: 1.33, y: -1.48, z: 1.2109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2010166782}

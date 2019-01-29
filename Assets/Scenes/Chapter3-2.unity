@@ -794,7 +794,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 160
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -1095,22 +1095,37 @@ Prefab:
     - target: {fileID: 114206532740766776, guid: f400012e1b1f4fe4396ad6edce621120,
         type: 2}
       propertyPath: m_Length
-      value: 0.28000027
+      value: 0.28000033
       objectReference: {fileID: 0}
     - target: {fileID: 114029355496389660, guid: f400012e1b1f4fe4396ad6edce621120,
         type: 2}
       propertyPath: m_Length
-      value: 0.3142063
+      value: 0.31420636
       objectReference: {fileID: 0}
     - target: {fileID: 114153992942577686, guid: f400012e1b1f4fe4396ad6edce621120,
         type: 2}
       propertyPath: m_Length
-      value: 0.25000012
+      value: 0.24999991
       objectReference: {fileID: 0}
     - target: {fileID: 114333432894471232, guid: f400012e1b1f4fe4396ad6edce621120,
         type: 2}
       propertyPath: m_JumpForce
       value: 400
+      objectReference: {fileID: 0}
+    - target: {fileID: 114027711275771954, guid: f400012e1b1f4fe4396ad6edce621120,
+        type: 2}
+      propertyPath: movementSpeed
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114058095000838678, guid: f400012e1b1f4fe4396ad6edce621120,
+        type: 2}
+      propertyPath: m_Length
+      value: 0.3668912
+      objectReference: {fileID: 0}
+    - target: {fileID: 114946110125676606, guid: f400012e1b1f4fe4396ad6edce621120,
+        type: 2}
+      propertyPath: m_Length
+      value: 7.0000033
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f400012e1b1f4fe4396ad6edce621120, type: 2}
@@ -1451,7 +1466,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 160
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -2072,7 +2087,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 160
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -2677,7 +2692,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 160
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
@@ -3089,7 +3104,7 @@ PlatformEffector2D:
   m_RotationalOffset: 0
   m_UseOneWay: 1
   m_UseOneWayGrouping: 0
-  m_SurfaceArc: 160
+  m_SurfaceArc: 170
   m_UseSideFriction: 0
   m_UseSideBounce: 0
   m_SideArc: 1
