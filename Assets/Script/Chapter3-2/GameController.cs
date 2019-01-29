@@ -214,8 +214,12 @@ public class GameController : MonoBehaviour
 			{
 				opening = false;
 				load = false;
-				player.isInControl = true;
-				vcam.Follow = player.transform;
+
+				if (SceneManager.GetActiveScene().name.Contains("Chapter"))
+				{
+					player.isInControl = true;
+					vcam.Follow = player.transform;
+				}
 			}
 		}
 	}

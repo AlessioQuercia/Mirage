@@ -1547,6 +1547,21 @@ Prefab:
       propertyPath: m_Name
       value: Pu
       objectReference: {fileID: 0}
+    - target: {fileID: 114801951858526452, guid: 06dc76db69e5cc6438742c94d55f2782,
+        type: 2}
+      propertyPath: onSwitch
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114801951858526452, guid: 06dc76db69e5cc6438742c94d55f2782,
+        type: 2}
+      propertyPath: runningSpeed
+      value: 45
+      objectReference: {fileID: 0}
+    - target: {fileID: 114801951858526452, guid: 06dc76db69e5cc6438742c94d55f2782,
+        type: 2}
+      propertyPath: walkingSpeed
+      value: 25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 06dc76db69e5cc6438742c94d55f2782, type: 2}
   m_IsPrefabAsset: 0

@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
     bool jump = false;
     bool crouch = false;
     public float walkingSpeed = 25f;
-    public float runningSpeed = 50f;
+    public float runningSpeed = 45f;
 
     // Inner interaction variables
     bool isDragging = false;
