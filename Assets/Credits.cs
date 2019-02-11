@@ -13,7 +13,7 @@ public class Credits : MonoBehaviour
 
 	public float environmentSpeed = 0.05f;
 
-	public float creditsSpeedIn = 1;
+	public float creditsSpeedIn = 0.01f;
 
 	public float creditsSpeedOut = 10;
 
@@ -21,10 +21,8 @@ public class Credits : MonoBehaviour
 
 	private float cloudY = 0.16f;
 
-	private float creditsYIn = -70;
+	private float creditsY = 2000;
 
-	private float creditsYOut = 900;
-	
 	private bool startCreditScene;
 
 	private bool endCreditScene;
@@ -55,22 +53,23 @@ public class Credits : MonoBehaviour
 			else
 				cloudReady = true;
 
+//			if (moonReady && cloudReady)
+//			{
+//				if (credits.anchoredPosition.y < creditsYIn)
+//					credits.anchoredPosition = new Vector2(credits.anchoredPosition.x, credits.anchoredPosition.y + creditsSpeedIn);
+//				else if (credits.anchoredPosition.y >= creditsYIn && !endCreditScene)
+//					Invoke("EndCreditScene", 8);
+//			}
 			if (moonReady && cloudReady)
 			{
-				if (credits.anchoredPosition.y < creditsYIn)
-					credits.anchoredPosition = new Vector2(credits.anchoredPosition.x, credits.anchoredPosition.y + creditsSpeedIn);
-				else if (credits.anchoredPosition.y >= creditsYIn && !endCreditScene)
-					Invoke("EndCreditScene", 8);
-			}
-		}
-		if (endCreditScene)
-		{
-			if (credits.anchoredPosition.y < creditsYOut)
-				credits.anchoredPosition = new Vector2(credits.anchoredPosition.x, credits.anchoredPosition.y + creditsSpeedOut);
-			else if (credits.anchoredPosition.y >= creditsYOut && !ending)
-			{
-				ending = true;
-				GameController.instance.LoadNextScene();
+				if (credits.position.y < creditsY)
+					credits.position = new Vector3(credits.position.x, credits.position.y + creditsSpeedIn,
+						credits.position.z);
+				else if (credits.position.y >= creditsY && !ending)
+				{
+					ending = true;
+					GameController.instance.LoadNextScene();
+				}
 			}
 		}
 	}
@@ -78,11 +77,5 @@ public class Credits : MonoBehaviour
 	void StartCreditScene()
 	{
 		startCreditScene = true;
-	}
-
-	void EndCreditScene()
-	{
-		endCreditScene = true;
-		startCreditScene = false;
 	}
 }
