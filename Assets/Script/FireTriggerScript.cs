@@ -8,6 +8,8 @@ public class FireTriggerScript : MonoBehaviour {
 
     private IEnumerator coroutine;
 
+    public AudioClip creepyMusic;
+
     public float fadeToBlackSpeed = 0.1f;
 
 	// Use this for initialization
@@ -47,6 +49,10 @@ public class FireTriggerScript : MonoBehaviour {
             fadeToBlack.GetComponent<SpriteRenderer>().color = new Color(color.r, color.b, color.b, color.a -= fadeToBlackSpeed * Time.deltaTime);
             yield return null;
         }
+
+        SoundManager.instance.musicSource.clip = creepyMusic;
+        SoundManager.instance.musicSource.Play();
+        
         player.GetComponent<PlayerController>().isInControl = true;
     }
 }
